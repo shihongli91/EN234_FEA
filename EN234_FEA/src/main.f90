@@ -6,6 +6,7 @@ program en234fea
 
   implicit none
 
+  integer :: num_kk
 !  Demo codes - basic 3D linear elasticity
 !
 !  infil = './input_files/linear_elastic_3d.in'
@@ -13,22 +14,31 @@ program en234fea
 !  outfil = './Output_files/linear_elastic_3d.out'
 !  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
-  infil = './input_files/Holeplate_3d.in'
-  open (unit = IOR, file = infil, status = 'old', ERR=500)
-  outfil = './Output_files/Holeplate_3d.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+! homework2
+      infil(1) = './input_files/Linear_elastic_2d_planestrain.in'
+   outfil(1) = './output_files/Linear_elastic_2d_planestrain.out'
+      infil(2) = './input_files/Linear_elastic_2d_planestress.in'
+   outfil(2) = './output_files/Linear_elastic_2d_planestress.out'
+      infil(3) = './input_files/Holeplate_2d_quad4.in'
+   outfil(3) = './output_files/Holeplate_2d_quad4.out'
+      infil(4) = './input_files/Holeplate_2d_quad8.in'
+   outfil(4) = './output_files/Holeplate_2d_quad8.out'
+      infil(5) = './input_files/Holeplate_2d_tri3.in'
+   outfil(5) = './output_files/Holeplate_2d_tri3.out'
+      infil(6) = './input_files/Holeplate_2d_tri6.in'
+   outfil(6) = './output_files/Holeplate_2d_tri6.out'
+      infil(7) = './input_files/Holeplate_2d_quad4_pstress.in'
+   outfil(7) = './output_files/Holeplate_2d_quad4_pstress.out'
+      infil(8) = './input_files/Holeplate_2d_quad8_pstress.in'
+   outfil(8) = './output_files/Holeplate_2d_quad8_pstress.out'
+      infil(9) = './input_files/Holeplate_2d_tri3_pstress.in'
+   outfil(9) = './output_files/Holeplate_2d_tri3_pstress.out'
+      infil(10) = './input_files/Holeplate_2d_tri6_pstress.in'
+   outfil(10) = './output_files/Holeplate_2d_tri6_pstress.out'
 
-
-!  infil = './input_files/linear_elastic_3d_dynamic.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/linear_elastic_3d_dynamic.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
-
-! This simulation takes a few minutes - be patient!
-!  infil = './input_files/holeplate_3d_dynamic.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/holeplate_3d_dynamic.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+ do num_kk = 1,10
+    open (unit = IOR, file = infil(num_kk), status = 'old', ERR=500)
+    open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)
 
 
 !  None of the files below will work until you write the codes that will use them!
@@ -109,7 +119,7 @@ program en234fea
 
   call read_input_file
   
-   if (printinitialmesh) call print_initial_mesh
+  if (printinitialmesh) call print_initial_mesh
 
   if (checkstiffness) call check_stiffness(checkstiffness_elementno)
 
@@ -117,18 +127,16 @@ program en234fea
       call compute_static_step
       if (checkstiffness) call check_stiffness(checkstiffness_elementno)
   endif
-  
-  if (explicitdynamicstep) call explicit_dynamic_step
-  
-  write(6,*) ' Program completed successfully '
+  if (explicitdynamicstep) then
+   call explicit_dynamic_step
+  endif
 
-  stop
-  
-  500 write(6,*) ' Error opening input or output file '
-  
+  enddo
+   write(6,*) ' Program completed successfully '
+   stop
+   500 write(6,*) ' Error opening input or output file '
 
-  
-  
 
-  
+
+
 end program en234fea

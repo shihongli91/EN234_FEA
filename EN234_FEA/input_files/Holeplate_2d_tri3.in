@@ -277,7 +277,7 @@
     257,  0.140728265,  0.112711251
     258,  0.164900571,  0.106391616
     259,   0.14249301,  0.072281383
-        END COORDINATES
+      END COORDINATES
       END NODES
 %
 %     The ELEMENT command defines properties of elements
@@ -787,7 +787,7 @@
         END NODESET
 
 
-       END ELEMENTSET
+%      END ELEMENTSET
 
 %       The DEGREE OF FREEDOM key assigns values to nodal DOFs
 %       The syntax is node set name, DOF number, VALUE/HISTORY/SUBROUTINE, value/history name/subroutine parameter list name.
@@ -806,7 +806,7 @@
 
 %  Print the initial mesh to a file named initial_mesh.dat
 
-   PRINT INITIAL MESH, initial_mesh.dat
+   PRINT INITIAL MESH, initial_mesh_holeplate_2d_tri3.dat
 
 %   TIME, VALUE, 0.d0        % Use this to specify the initial time
 %   TIME, INCREMENT, 0.01d0  % Use this to specify a time increment (often needed for check stiffness)
@@ -828,7 +828,7 @@
           INITIAL TIME STEP, 1.d0        % Test of a comment here
           MAX TIME STEP, 1.d0
           MIN TIME STEP, 0.001d0
-          MAX NUMBER OF STEPS, 3
+          MAX NUMBER OF STEPS, 20
           STOP TIME, 10.d0
           STATE PRINT STEP INTERVAL, 1
           USER PRINT STEP INTERVAL, 1
@@ -853,9 +853,9 @@
 %         The projected states are controlled by the user - see subroutine elstat in file usrelem.f90
 %         Also (for this example file) subroutine state_linelast_3dbasic in file el_linelast_3Dbasic.f90
 %         In this example the states are the stresses sxx,syy,szz,sxy,sxz,syz
-         PRINT STATE, Output_files\contourplots.dat
+         PRINT STATE, Output_files\contourplots_holeplate_2d_tri3.dat
             DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12
+            FIELD VARIABLES,  S11,S22,S33,S12,S13,S23,E11,E22,E12,E33,E13,E23,SMISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE
