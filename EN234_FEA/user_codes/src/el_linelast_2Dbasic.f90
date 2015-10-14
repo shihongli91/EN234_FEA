@@ -77,7 +77,7 @@ subroutine el_linelast_2d_planestrain(lmn, element_identifier, n_nodes, node_pro
 
     if (n_nodes == 3) n_points = 3
     if (n_nodes == 6) n_points = 4
-    if (n_nodes == 8) n_points = 4
+    if (n_nodes == 8) n_points = 9
     if (n_nodes == 4) n_points = 4
 
     call initialize_integration_points(n_points, n_nodes, xi, w)
@@ -198,7 +198,7 @@ subroutine el_linelast_2d_planestress(lmn, element_identifier, n_nodes, node_pro
 
     if (n_nodes == 3) n_points = 3
     if (n_nodes == 6) n_points = 4
-    if (n_nodes == 8) n_points = 4
+    if (n_nodes == 8) n_points = 9
     if (n_nodes == 4) n_points = 4
 
     call initialize_integration_points(n_points, n_nodes, xi, w)
@@ -322,7 +322,7 @@ subroutine fieldvars_linelast_2d_planestrain(lmn, element_identifier, n_nodes, n
 
     if (n_nodes == 3) n_points = 3
     if (n_nodes == 6) n_points = 4
-    if (n_nodes == 8) n_points = 4
+    if (n_nodes == 8) n_points = 9
     if (n_nodes == 4) n_points = 4
 
     call initialize_integration_points(n_points, n_nodes, xi, w)
@@ -496,7 +496,7 @@ subroutine fieldvars_linelast_2d_planestress(lmn, element_identifier, n_nodes, n
 
     if (n_nodes == 3) n_points = 3
     if (n_nodes == 6) n_points = 4
-    if (n_nodes == 8) n_points = 4
+    if (n_nodes == 8) n_points = 9
     if (n_nodes == 4) n_points = 4
 
     call initialize_integration_points(n_points, n_nodes, xi, w)

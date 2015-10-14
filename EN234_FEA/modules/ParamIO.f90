@@ -19,7 +19,7 @@ module ParamIO
   character ( len = 100 ) :: strpar(100)
   integer :: ityp(100), lenstr(100)  
 
-  character ( len = 100 ), dimension(10) :: infil, outfil
-  
+ ! character ( len = 100 ), dimension(10) :: infil, outfil
+  character ( len = 100 ) :: infil, outfil
 
 end module ParamIO
