@@ -384,8 +384,8 @@ subroutine compute_J_integral(J_integral_value,Stress_Intensity_factor)
       do i = 1, n_nodes
         disp_x(1) = disp_x(1)+ N(i)*x(1,i)
         disp_x(2) = disp_x(2)+ N(i)*x(2,i)
-        du_dx2(1) = du_dx2(1) + dNdx(i,2)*(dof_total(2*i-1))
-        du_dx2(2) = du_dx2(2) + dNdx(i,2)*(dof_total(2*i))
+        du_dx2(1) = du_dx2(1) + dNdx(i,2)*(dof_total(2*i-1)+dof_increment(2*i-1))
+        du_dx2(2) = du_dx2(2) + dNdx(i,2)*(dof_total(2*i)+dof_increment(2*i))
       end do
 
         r0 = 0.0006d0
