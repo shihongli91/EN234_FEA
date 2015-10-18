@@ -6,7 +6,7 @@ program en234fea
 
   implicit none
 
-!  integer :: num_kk
+  integer :: num_kk
 !  Demo codes - basic 3D linear elasticity
 !
 !  infil = './input_files/linear_elastic_3d.in'
@@ -47,13 +47,26 @@ program en234fea
 
 !
 !  Homework 4, crack tip elements and the J integral
-  infil = './input_files/crack_tri6.in'
-  open (unit = IOR, file = infil, status = 'old', ERR=500)
-  outfil = './Output_files/crack_tri6.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!  infil = './input_files/crack_tri6.in'
+!  open (unit = IOR, file = infil, status = 'old', ERR=500)
+!  outfil = './Output_files/crack_tri6.out'
+!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!
 !  Homework 5, small-strain B bar element - test with same files as in HW3, but
 !  try approaching incompressible limit by making Poisson's ratio close to 0.5
-
+      infil(1) = './input_files/Linear_elastic_3d.in'
+  outfil(1) = './output_files/Linear_elastic_3d.out'
+      infil(2) = './input_files/Linear_elastic_3d_Bbar.in'
+   outfil(2) = './output_files/Linear_elastic_3d_Bbar.out'
+      infil(3) = './input_files/Holeplate_3d.in'
+   outfil(3) = './output_files/Holeplate_3d.out'
+      infil(4) = './input_files/Holeplate_3d_Bbar.in'
+   outfil(4) = './output_files/Holeplate_3d_Bbar.out'
+  ! write(*,*) infil
+  do num_kk =1,4
+   write(*,*) 'LOOP'
+    open (unit = IOR, file = infil(num_kk), status = 'old', ERR=500)
+    open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)
 !
 ! Homework 6: small-strain Armstrong-Frederick kinematic hardening model
 !  infil = './input_files/cyclic_plastic_3d.in'
@@ -92,8 +105,9 @@ program en234fea
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
 !  outfil = './Output_files/notch_fracture_dynamic.out'
 !  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+  write(*,*) 'in'
   call read_input_file
-
+  write(*,*) 'out'
   if (printinitialmesh) call print_initial_mesh
   if (checkstiffness) call check_stiffness(checkstiffness_elementno)
 
@@ -107,7 +121,7 @@ program en234fea
   endif
 
 
- ! enddo
+ end do
    write(6,*) ' Program completed successfully '
    stop
    500 write(6,*) ' Error opening input or output file '

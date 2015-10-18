@@ -4135,7 +4135,7 @@ END NODES
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio 
         PROPERTIES
-         100.d0, 0.3d0
+         100.d0, 0.499d0
         END PROPERTIES
 %     Define mass density (for explicity dynamics only)
 %       DENSITY, 10.d0
@@ -7344,7 +7344,7 @@ END MESH
 
 %  Print the initial mesh to a file named initial_mesh.dat
 
-   PRINT INITIAL MESH, Output_files\initial_mesh.dat
+   PRINT INITIAL MESH, Output_files\initial_mesh_holeplate_3d.dat
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
@@ -7367,7 +7367,7 @@ END MESH
           INITIAL TIME STEP, 1.d0
           MAX TIME STEP, 1.d0
           MIN TIME STEP, 0.001d0
-          MAX NUMBER OF STEPS, 1
+          MAX NUMBER OF STEPS, 20
           STOP TIME, 10.d0
           STATE PRINT STEP INTERVAL, 1
           USER PRINT STEP INTERVAL, 1
@@ -7390,9 +7390,9 @@ END MESH
 
 
 
-         PRINT STATE, Output_files\contourplots.dat
+         PRINT STATE, Output_files\contourplots_holeplate_3d.dat
 %            DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12,S13,S23
+            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,E11,E22,E33,E12,E23,E13
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE

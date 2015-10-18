@@ -15,6 +15,7 @@ subroutine el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_l
     use Element_Utilities, only : N => shape_functions_3D
     use Element_Utilities, only : dNdxi => shape_function_derivatives_3D
     use Element_Utilities, only:  dNdx => shape_function_spatial_derivatives_3D
+    use Element_Utilities, only : dNbardx => vol_avg_shape_function_derivatives_3D
     use Element_Utilities, only : xi => integrationpoints_3D, w => integrationweights_3D
     use Element_Utilities, only : dxdxi => jacobian_3D
     use Element_Utilities, only : initialize_integration_points
@@ -55,15 +56,19 @@ subroutine el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_l
           
 
     ! Local Variables
-    integer      :: n_points,kint
+    integer      :: n_points,kint,m_count, n_count
 
     real (prec)  ::  strain(6), dstrain(6)             ! Strain vector contains [e11, e22, e33, 2e12, 2e13, 2e23]
     real (prec)  ::  stress(6)                         ! Stress vector contains [s11, s22, s33, s12, s13, s23]
     real (prec)  ::  D(6,6)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
     real (prec)  ::  B(6,length_dof_array)             ! strain = B*(dof_total+dof_increment)
+    real (prec)  ::  Bbar(6,length_dof_array)          ! strain = Bbar*(dof_total+dof_increment), B-bar method
+    real (prec)  ::  temp(6,length_dof_array)          ! temp matrix when constructing B-bar matrix
+    real (prec)  ::  el_vol                            ! element volume
     real (prec)  ::  dxidx(3,3), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(3,length_coord_array/3)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  :: E, xnu, D44, D11, D12              ! Material properties
+
     !
     !     Subroutine to compute element stiffness matrix and residual force vector for 3D linear elastic elements
     !     El props are:
@@ -98,14 +103,40 @@ subroutine el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_l
     D(4,4) = d44
     D(5,5) = d44
     D(6,6) = d44
-  
+    el_vol = 0.d0
+    dNbardx = 0.d0
+    !     -- Loop over the integration points for B bar method
+    do kint = 1, n_points
+       call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
+        dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
+        call invert_small(dxdxi,dxidx,determinant)
+        dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+    !
+        do m_count = 1,n_nodes
+           do n_count = 1,3
+              dNbardx(m_count,n_count) = dNbardx(m_count,n_count) + &
+                                         dNdx(m_count,n_count)*w(kint)*determinant
+           end do
+        end do
+    !   Get the average element volume
+        el_vol = el_vol + w(kint)*determinant
+    end do
+    !   Get the final form of vol_avg_shape function derivatives
+       do m_count = 1,n_nodes
+         do n_count = 1,3
+             dNbardx(m_count,n_count) = dNbardx(m_count,n_count)/el_vol
+         end do
+       end do
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
         dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
         call invert_small(dxdxi,dxidx,determinant)
         dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+
         B = 0.d0
+        temp = 0.d0
+        Bbar = 0.d0
         B(1,1:3*n_nodes-2:3) = dNdx(1:n_nodes,1)
         B(2,2:3*n_nodes-1:3) = dNdx(1:n_nodes,2)
         B(3,3:3*n_nodes:3)   = dNdx(1:n_nodes,3)
@@ -116,14 +147,35 @@ subroutine el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_l
         B(6,2:3*n_nodes-1:3) = dNdx(1:n_nodes,3)
         B(6,3:3*n_nodes:3)   = dNdx(1:n_nodes,2)
 
+        do m_count = 1,n_nodes
+        temp(1:3:1,3*m_count-2) = dNbardx(m_count,1) - dNdx(m_count,1)
+        temp(1:3:1,3*m_count-1) = dNbardx(m_count,2) - dNdx(m_count,2)
+        temp(1:3:1,3*m_count) = dNbardx(m_count,3) - dNdx(m_count,3)
+        end do
+
+        Bbar = B + 1.d0/3.d0 *temp
+
+       if ( element_identifier == 1001 ) then
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
-      
+
         stress = matmul(D,strain+dstrain)
         element_residual(1:3*n_nodes) = element_residual(1:3*n_nodes) - matmul(transpose(B),stress)*w(kint)*determinant
 
         element_stiffness(1:3*n_nodes,1:3*n_nodes) = element_stiffness(1:3*n_nodes,1:3*n_nodes) &
             + matmul(transpose(B(1:6,1:3*n_nodes)),matmul(D,B(1:6,1:3*n_nodes)))*w(kint)*determinant
+
+       else if (element_identifier == 2001) then
+        strain = matmul(Bbar,dof_total)
+        dstrain = matmul(Bbar,dof_increment)
+
+        stress = matmul(D,strain+dstrain)
+        element_residual(1:3*n_nodes) = element_residual(1:3*n_nodes) - matmul(transpose(Bbar),stress)*w(kint)*determinant
+
+        element_stiffness(1:3*n_nodes,1:3*n_nodes) = element_stiffness(1:3*n_nodes,1:3*n_nodes) &
+            + matmul(transpose(Bbar(1:6,1:3*n_nodes)),matmul(D,Bbar(1:6,1:3*n_nodes)))*w(kint)*determinant
+
+       end if
 
     end do
   
@@ -188,6 +240,9 @@ subroutine el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_pr
     real (prec)  ::  stress(6)                         ! Stress vector contains [s11, s22, s33, s12, s13, s23]
     real (prec)  ::  D(6,6)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
     real (prec)  ::  B(6,length_dof_array)             ! strain = B*(dof_total+dof_increment)
+    real (prec)  ::  Bbar(6,length_dof_array)          ! strain = Bbar*(dof_total+dof_increment), B-bar method
+    real (prec)  ::  temp(6,length_dof_array)          ! temp matrix when constructing B-bar matrix
+    real (prec)  ::  el_vol                            ! element volume
     real (prec)  ::  dxidx(3,3), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(3,length_coord_array/3)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  :: E, xnu, D44, D11, D12              ! Material properties
@@ -222,7 +277,7 @@ subroutine el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_pr
     D(4,4) = d44
     D(5,5) = d44
     D(6,6) = d44
-  
+
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
@@ -265,6 +320,7 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
     use Element_Utilities, only : N => shape_functions_3D
     use Element_Utilities, only: dNdxi => shape_function_derivatives_3D
     use Element_Utilities, only: dNdx => shape_function_spatial_derivatives_3D
+    use Element_Utilities, only : dNbardx => vol_avg_shape_function_derivatives_3D
     use Element_Utilities, only : xi => integrationpoints_3D, w => integrationweights_3D
     use Element_Utilities, only : dxdxi => jacobian_3D
     use Element_Utilities, only : initialize_integration_points
@@ -307,13 +363,16 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
     ! Local Variables
     logical      :: strcmp
   
-    integer      :: n_points,kint,k
+    integer      :: n_points,kint,k,m_count, n_count
 
     real (prec)  ::  strain(6), dstrain(6)             ! Strain vector contains [e11, e22, e33, 2e12, 2e13, 2e23]
     real (prec)  ::  stress(6)                         ! Stress vector contains [s11, s22, s33, s12, s13, s23]
     real (prec)  ::  sdev(6)                           ! Deviatoric stress
     real (prec)  ::  D(6,6)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
     real (prec)  ::  B(6,length_dof_array)             ! strain = B*(dof_total+dof_increment)
+    real (prec)  ::  Bbar(6,length_dof_array)          ! strain = Bbar*(dof_total+dof_increment), B-bar method
+    real (prec)  ::  temp(6,length_dof_array)          ! temp matrix when constructing B-bar matrix
+    real (prec)  ::  el_vol                            ! element volume
     real (prec)  ::  dxidx(3,3), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(3,length_coord_array/3)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  :: E, xnu, D44, D11, D12              ! Material properties
@@ -348,7 +407,32 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
     D(4,4) = d44
     D(5,5) = d44
     D(6,6) = d44
-  
+
+    el_vol = 0.d0
+    dNbardx = 0.d0
+     !     -- Loop over the integration points for B bar method
+    do kint = 1, n_points
+       call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
+        dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
+        call invert_small(dxdxi,dxidx,determinant)
+        dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+    !
+        do m_count = 1,n_nodes
+           do n_count = 1,3
+              dNbardx(m_count,n_count) = dNbardx(m_count,n_count) + &
+                                         dNdx(m_count,n_count)*w(kint)*determinant
+           end do
+        end do
+    !   Get the average element volume
+        el_vol = el_vol + w(kint)*determinant
+    end do
+
+    !   Get the final form of vol_avg_shape function derivatives
+       do m_count = 1,n_nodes
+         do n_count = 1,3
+             dNbardx(m_count,n_count) = dNbardx(m_count,n_count)/el_vol
+         end do
+       end do
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
@@ -356,6 +440,8 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
         call invert_small(dxdxi,dxidx,determinant)
         dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
         B = 0.d0
+        temp = 0.d0
+        Bbar = 0.d0
         B(1,1:3*n_nodes-2:3) = dNdx(1:n_nodes,1)
         B(2,2:3*n_nodes-1:3) = dNdx(1:n_nodes,2)
         B(3,3:3*n_nodes:3)   = dNdx(1:n_nodes,3)
@@ -365,14 +451,28 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
         B(5,3:3*n_nodes:3)   = dNdx(1:n_nodes,1)
         B(6,2:3*n_nodes-1:3) = dNdx(1:n_nodes,3)
         B(6,3:3*n_nodes:3)   = dNdx(1:n_nodes,2)
-
+        do m_count=1,n_nodes
+        temp(1:3:1,3*m_count-2) = dNbardx(m_count,1) - dNdx(m_count,1)
+        temp(1:3:1,3*m_count-1) = dNbardx(m_count,2) - dNdx(m_count,2)
+        temp(1:3:1,3*m_count) = dNbardx(m_count,3) - dNdx(m_count,3)
+        end do
+        Bbar = B + 1.d0/3.d0 *temp
+        if ( element_identifier == 1001 ) then
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
-        stress = matmul(D,strain+dstrain)
+        strain = strain + dstrain
+        stress = matmul(D,strain)
+        else if ( element_identifier == 2001 ) then
+        strain = matmul(Bbar,dof_total)
+        dstrain = matmul(Bbar,dof_increment)
+        strain = strain + dstrain
+        stress = matmul(D,strain)
+        end if
         p = sum(stress(1:3))/3.d0
         sdev = stress
         sdev(1:3) = sdev(1:3)-p
         smises = dsqrt( dot_product(sdev(1:3),sdev(1:3)) + 2.d0*dot_product(sdev(4:6),sdev(4:6)) )*dsqrt(1.5d0)
+
         ! In the code below the strcmp( string1, string2, nchar) function returns true if the first nchar characters in strings match
         do k = 1,n_field_variables
             if (strcmp(field_variable_names(k),'S11',3) ) then
@@ -387,9 +487,24 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(5)*N(1:n_nodes)*determinant*w(kint)
             else if (strcmp(field_variable_names(k),'S23',3) ) then
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(6)*N(1:n_nodes)*determinant*w(kint)
+            else if (strcmp(field_variable_names(k),'E11',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(1)*N(1:n_nodes)*determinant*w(kint)
+            else if (strcmp(field_variable_names(k),'E22',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(2)*N(1:n_nodes)*determinant*w(kint)
+            else if (strcmp(field_variable_names(k),'E33',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(3)*N(1:n_nodes)*determinant*w(kint)
+            else if (strcmp(field_variable_names(k),'E12',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(4)/0.5d0*N(1:n_nodes)*determinant &
+                *w(kint)
+            else if (strcmp(field_variable_names(k),'E13',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(5)/0.5d0*N(1:n_nodes)*determinant &
+                *w(kint)
+            else if (strcmp(field_variable_names(k),'E23',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(6)/0.5d0*N(1:n_nodes)*determinant &
+                *w(kint)
             else if (strcmp(field_variable_names(k),'SMISES',6) ) then
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + smises*N(1:n_nodes)*determinant*w(kint)
-            endif
+            end if
         end do
  
     end do

@@ -34,10 +34,14 @@ subroutine compute_static_step
         allocate(node_order_index(n_nodes+n_constraints), stat = status)
 
         call generate_node_numbers(1,n_elements,.true.,node_numbers,node_order_index)
+
         call compute_profile
+
         call allocate_direct_stiffness
 
+
         do while (continue_timesteps)
+
             call assemble_direct_stiffness(fail)
 
             if (fail) then                          ! Force a timestep cutback if stiffness computation fails
@@ -53,7 +57,7 @@ subroutine compute_static_step
             call apply_direct_boundaryconditions
             call solve_direct
             converged = .true.
-         
+
             if (nonlinear) then                          ! Nonlinear problem - activate Newton iterations
                 do iteration = 1,max_newton_iterations
                     call assemble_direct_stiffness(fail)
@@ -68,15 +72,16 @@ subroutine compute_static_step
 
             call compute_static_time_increment(iteration,converged,continue_timesteps, &
                 activatestateprint,activateuserprint,new_time_increment)
-         
+
             if (.not.converged) then
                 dof_increment = 0.d0
                 DTIME = new_time_increment
                 cycle
             endif
-         
+
             if (activatestateprint)  call print_state
-            if (activateuserprint) call user_print(current_step_number)
+
+           if (activateuserprint) call user_print(current_step_number)
 
             !        Update solution and continue
             current_step_number = current_step_number + 1
