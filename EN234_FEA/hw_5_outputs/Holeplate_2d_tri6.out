@@ -1,0 +1,691 @@
+
+
+ The input file has been read successfully 
+ Number of elements:              457
+ Number of nodes:                 974
+ Number of constraints:             0
+ Total no. degrees of freedom:   1948
+
+  Column            1  node            1  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.76494D+03 Numerical deriv     0.76494D+03
+ Row    2 node    1 DOF    2 Stiffness     0.24614D+04 Numerical deriv     0.24614D+04
+ Row    3 node    2 DOF    1 Stiffness     0.80278D+03 Numerical deriv     0.80278D+03
+ Row    4 node    2 DOF    2 Stiffness     0.64858D+02 Numerical deriv     0.64858D+02
+ Row    5 node    3 DOF    1 Stiffness    -0.63480D+03 Numerical deriv    -0.63480D+03
+ Row    6 node    3 DOF    2 Stiffness     0.80752D+03 Numerical deriv     0.80752D+03
+ Row    7 node    4 DOF    1 Stiffness    -0.34287D+04 Numerical deriv    -0.34287D+04
+ Row    8 node    4 DOF    2 Stiffness    -0.22556D+03 Numerical deriv    -0.22556D+03
+ Row    9 node    5 DOF    1 Stiffness     0.10302D+03 Numerical deriv     0.10302D+03
+ Row   10 node    5 DOF    2 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row   11 node    6 DOF    1 Stiffness     0.23928D+04 Numerical deriv     0.23928D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.30887D+04 Numerical deriv    -0.30887D+04
+
+  Column            2  node            1  DOF            2
+ Row    1 node    1 DOF    1 Stiffness     0.24614D+04 Numerical deriv     0.24614D+04
+ Row    2 node    1 DOF    2 Stiffness     0.81328D+04 Numerical deriv     0.81328D+04
+ Row    3 node    2 DOF    1 Stiffness     0.28334D+04 Numerical deriv     0.28334D+04
+ Row    4 node    2 DOF    2 Stiffness     0.21341D+03 Numerical deriv     0.21341D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.19610D+04 Numerical deriv    -0.19610D+04
+ Row    6 node    3 DOF    2 Stiffness     0.25053D+04 Numerical deriv     0.25053D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.11300D+05 Numerical deriv    -0.11300D+05
+ Row    8 node    4 DOF    2 Stiffness    -0.88010D+03 Numerical deriv    -0.88010D+03
+ Row    9 node    5 DOF    1 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row   10 node    5 DOF    2 Stiffness     0.10879D+03 Numerical deriv     0.10879D+03
+ Row   11 node    6 DOF    1 Stiffness     0.79853D+04 Numerical deriv     0.79853D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.10080D+05 Numerical deriv    -0.10080D+05
+
+  Column            3  node            2  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.80278D+03 Numerical deriv     0.80278D+03
+ Row    2 node    1 DOF    2 Stiffness     0.28334D+04 Numerical deriv     0.28334D+04
+ Row    3 node    2 DOF    1 Stiffness     0.85191D+04 Numerical deriv     0.85191D+04
+ Row    4 node    2 DOF    2 Stiffness     0.69451D+03 Numerical deriv     0.69451D+03
+ Row    5 node    3 DOF    1 Stiffness     0.20676D+04 Numerical deriv     0.20676D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.26202D+04 Numerical deriv    -0.26202D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.30265D+04 Numerical deriv    -0.30265D+04
+ Row    8 node    4 DOF    2 Stiffness    -0.11291D+05 Numerical deriv    -0.11291D+05
+ Row    9 node    5 DOF    1 Stiffness    -0.86628D+04 Numerical deriv    -0.86628D+04
+ Row   10 node    5 DOF    2 Stiffness     0.10425D+05 Numerical deriv     0.10425D+05
+ Row   11 node    6 DOF    1 Stiffness     0.29985D+03 Numerical deriv     0.29985D+03
+ Row   12 node    6 DOF    2 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+
+  Column            4  node            2  DOF            2
+ Row    1 node    1 DOF    1 Stiffness     0.64858D+02 Numerical deriv     0.64858D+02
+ Row    2 node    1 DOF    2 Stiffness     0.21341D+03 Numerical deriv     0.21341D+03
+ Row    3 node    2 DOF    1 Stiffness     0.69451D+03 Numerical deriv     0.69451D+03
+ Row    4 node    2 DOF    2 Stiffness     0.73877D+02 Numerical deriv     0.73877D+02
+ Row    5 node    3 DOF    1 Stiffness     0.14831D+03 Numerical deriv     0.14831D+03
+ Row    6 node    3 DOF    2 Stiffness    -0.19167D+03 Numerical deriv    -0.19167D+03
+ Row    7 node    4 DOF    1 Stiffness    -0.21718D+03 Numerical deriv    -0.21718D+03
+ Row    8 node    4 DOF    2 Stiffness    -0.96899D+03 Numerical deriv    -0.96899D+03
+ Row    9 node    5 DOF    1 Stiffness    -0.64943D+03 Numerical deriv    -0.64943D+03
+ Row   10 node    5 DOF    2 Stiffness     0.88065D+03 Numerical deriv     0.88065D+03
+ Row   11 node    6 DOF    1 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+ Row   12 node    6 DOF    2 Stiffness    -0.72795D+01 Numerical deriv    -0.72795D+01
+
+  Column            5  node            3  DOF            1
+ Row    1 node    1 DOF    1 Stiffness    -0.63480D+03 Numerical deriv    -0.63480D+03
+ Row    2 node    1 DOF    2 Stiffness    -0.19610D+04 Numerical deriv    -0.19610D+04
+ Row    3 node    2 DOF    1 Stiffness     0.20676D+04 Numerical deriv     0.20676D+04
+ Row    4 node    2 DOF    2 Stiffness     0.14831D+03 Numerical deriv     0.14831D+03
+ Row    5 node    3 DOF    1 Stiffness     0.41323D+04 Numerical deriv     0.41323D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.53387D+04 Numerical deriv    -0.53387D+04
+ Row    7 node    4 DOF    1 Stiffness     0.25398D+03 Numerical deriv     0.25398D+03
+ Row    8 node    4 DOF    2 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    9 node    5 DOF    1 Stiffness    -0.83253D+04 Numerical deriv    -0.83253D+04
+ Row   10 node    5 DOF    2 Stiffness    -0.31147D+03 Numerical deriv    -0.31147D+03
+ Row   11 node    6 DOF    1 Stiffness     0.25062D+04 Numerical deriv     0.25062D+04
+ Row   12 node    6 DOF    2 Stiffness     0.76713D+04 Numerical deriv     0.76713D+04
+
+  Column            6  node            3  DOF            2
+ Row    1 node    1 DOF    1 Stiffness     0.80752D+03 Numerical deriv     0.80752D+03
+ Row    2 node    1 DOF    2 Stiffness     0.25053D+04 Numerical deriv     0.25053D+04
+ Row    3 node    2 DOF    1 Stiffness    -0.26202D+04 Numerical deriv    -0.26202D+04
+ Row    4 node    2 DOF    2 Stiffness    -0.19167D+03 Numerical deriv    -0.19167D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.53387D+04 Numerical deriv    -0.53387D+04
+ Row    6 node    3 DOF    2 Stiffness     0.69566D+04 Numerical deriv     0.69566D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    8 node    4 DOF    2 Stiffness     0.12070D+03 Numerical deriv     0.12070D+03
+ Row    9 node    5 DOF    1 Stiffness     0.10763D+05 Numerical deriv     0.10763D+05
+ Row   10 node    5 DOF    2 Stiffness     0.57621D+03 Numerical deriv     0.57621D+03
+ Row   11 node    6 DOF    1 Stiffness    -0.34027D+04 Numerical deriv    -0.34027D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.99672D+04 Numerical deriv    -0.99672D+04
+
+  Column            7  node            4  DOF            1
+ Row    1 node    1 DOF    1 Stiffness    -0.34287D+04 Numerical deriv    -0.34287D+04
+ Row    2 node    1 DOF    2 Stiffness    -0.11300D+05 Numerical deriv    -0.11300D+05
+ Row    3 node    2 DOF    1 Stiffness    -0.30265D+04 Numerical deriv    -0.30265D+04
+ Row    4 node    2 DOF    2 Stiffness    -0.21718D+03 Numerical deriv    -0.21718D+03
+ Row    5 node    3 DOF    1 Stiffness     0.25398D+03 Numerical deriv     0.25398D+03
+ Row    6 node    3 DOF    2 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    7 node    4 DOF    1 Stiffness     0.19039D+05 Numerical deriv     0.19039D+05
+ Row    8 node    4 DOF    2 Stiffness    -0.40501D+04 Numerical deriv    -0.40501D+04
+ Row    9 node    5 DOF    1 Stiffness     0.44632D+04 Numerical deriv     0.44632D+04
+ Row   10 node    5 DOF    2 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row   11 node    6 DOF    1 Stiffness    -0.17301D+05 Numerical deriv    -0.17301D+05
+ Row   12 node    6 DOF    2 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+
+  Column            8  node            4  DOF            2
+ Row    1 node    1 DOF    1 Stiffness    -0.22556D+03 Numerical deriv    -0.22556D+03
+ Row    2 node    1 DOF    2 Stiffness    -0.88010D+03 Numerical deriv    -0.88010D+03
+ Row    3 node    2 DOF    1 Stiffness    -0.11291D+05 Numerical deriv    -0.11291D+05
+ Row    4 node    2 DOF    2 Stiffness    -0.96899D+03 Numerical deriv    -0.96899D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    6 node    3 DOF    2 Stiffness     0.12070D+03 Numerical deriv     0.12070D+03
+ Row    7 node    4 DOF    1 Stiffness    -0.40501D+04 Numerical deriv    -0.40501D+04
+ Row    8 node    4 DOF    2 Stiffness     0.21269D+05 Numerical deriv     0.21269D+05
+ Row    9 node    5 DOF    1 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row   10 node    5 DOF    2 Stiffness    -0.20961D+05 Numerical deriv    -0.20961D+05
+ Row   11 node    6 DOF    1 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+ Row   12 node    6 DOF    2 Stiffness     0.14208D+04 Numerical deriv     0.14208D+04
+
+  Column            9  node            5  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.10302D+03 Numerical deriv     0.10302D+03
+ Row    2 node    1 DOF    2 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row    3 node    2 DOF    1 Stiffness    -0.86628D+04 Numerical deriv    -0.86628D+04
+ Row    4 node    2 DOF    2 Stiffness    -0.64943D+03 Numerical deriv    -0.64943D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.83253D+04 Numerical deriv    -0.83253D+04
+ Row    6 node    3 DOF    2 Stiffness     0.10763D+05 Numerical deriv     0.10763D+05
+ Row    7 node    4 DOF    1 Stiffness     0.44632D+04 Numerical deriv     0.44632D+04
+ Row    8 node    4 DOF    2 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row    9 node    5 DOF    1 Stiffness     0.20117D+05 Numerical deriv     0.20117D+05
+ Row   10 node    5 DOF    2 Stiffness    -0.39021D+04 Numerical deriv    -0.39021D+04
+ Row   11 node    6 DOF    1 Stiffness    -0.76948D+04 Numerical deriv    -0.76948D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+
+  Column           10  node            5  DOF            2
+ Row    1 node    1 DOF    1 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row    2 node    1 DOF    2 Stiffness     0.10879D+03 Numerical deriv     0.10879D+03
+ Row    3 node    2 DOF    1 Stiffness     0.10425D+05 Numerical deriv     0.10425D+05
+ Row    4 node    2 DOF    2 Stiffness     0.88065D+03 Numerical deriv     0.88065D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.31147D+03 Numerical deriv    -0.31147D+03
+ Row    6 node    3 DOF    2 Stiffness     0.57621D+03 Numerical deriv     0.57621D+03
+ Row    7 node    4 DOF    1 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row    8 node    4 DOF    2 Stiffness    -0.20961D+05 Numerical deriv    -0.20961D+05
+ Row    9 node    5 DOF    1 Stiffness    -0.39021D+04 Numerical deriv    -0.39021D+04
+ Row   10 node    5 DOF    2 Stiffness     0.20968D+05 Numerical deriv     0.20968D+05
+ Row   11 node    6 DOF    1 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+ Row   12 node    6 DOF    2 Stiffness    -0.15720D+04 Numerical deriv    -0.15720D+04
+
+  Column           11  node            6  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.23928D+04 Numerical deriv     0.23928D+04
+ Row    2 node    1 DOF    2 Stiffness     0.79853D+04 Numerical deriv     0.79853D+04
+ Row    3 node    2 DOF    1 Stiffness     0.29985D+03 Numerical deriv     0.29985D+03
+ Row    4 node    2 DOF    2 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+ Row    5 node    3 DOF    1 Stiffness     0.25062D+04 Numerical deriv     0.25062D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.34027D+04 Numerical deriv    -0.34027D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.17301D+05 Numerical deriv    -0.17301D+05
+ Row    8 node    4 DOF    2 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+ Row    9 node    5 DOF    1 Stiffness    -0.76948D+04 Numerical deriv    -0.76948D+04
+ Row   10 node    5 DOF    2 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+ Row   11 node    6 DOF    1 Stiffness     0.19797D+05 Numerical deriv     0.19797D+05
+ Row   12 node    6 DOF    2 Stiffness    -0.29457D+04 Numerical deriv    -0.29457D+04
+
+  Column           12  node            6  DOF            2
+ Row    1 node    1 DOF    1 Stiffness    -0.30887D+04 Numerical deriv    -0.30887D+04
+ Row    2 node    1 DOF    2 Stiffness    -0.10080D+05 Numerical deriv    -0.10080D+05
+ Row    3 node    2 DOF    1 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+ Row    4 node    2 DOF    2 Stiffness    -0.72795D+01 Numerical deriv    -0.72795D+01
+ Row    5 node    3 DOF    1 Stiffness     0.76713D+04 Numerical deriv     0.76713D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.99672D+04 Numerical deriv    -0.99672D+04
+ Row    7 node    4 DOF    1 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+ Row    8 node    4 DOF    2 Stiffness     0.14208D+04 Numerical deriv     0.14208D+04
+ Row    9 node    5 DOF    1 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+ Row   10 node    5 DOF    2 Stiffness    -0.15720D+04 Numerical deriv    -0.15720D+04
+ Row   11 node    6 DOF    1 Stiffness    -0.29457D+04 Numerical deriv    -0.29457D+04
+ Row   12 node    6 DOF    2 Stiffness     0.20206D+05 Numerical deriv     0.20206D+05
+
+
+ Stiffness matrix is consistent with residual 
+
+
+
+
+ Direct Solver Profiler has completed profile computation 
+     Total number of equations       1948
+     Maximum half bandwidth:          165
+     Mean half bandwidth:              60
+     RMS half bandwidth:               81
+     Size of stiffness matrix:     116862
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.243518D-02
+  Generalized Force norm        0.256535D-02
+  Out of balance force norm     0.260837D-13
+  Ratio                         0.521618D-11
+  Tolerance                     0.100000D-04
+
+
+    Step number     1 has completed successfully
+    Steps remaining:                          19
+    Elapsed time:                     1.0000    
+    Time remaining:                   9.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.548655D-14
+  Generalized Force norm        0.513070D-02
+  Out of balance force norm     0.102219D-13
+  Ratio                         0.199230D-11
+  Tolerance                     0.100000D-04
+
+
+    Step number     2 has completed successfully
+    Steps remaining:                          18
+    Elapsed time:                     2.0000    
+    Time remaining:                   8.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.274562D-14
+  Generalized Force norm        0.769605D-02
+  Out of balance force norm     0.990636D-14
+  Ratio                         0.128720D-11
+  Tolerance                     0.100000D-04
+
+
+    Step number     3 has completed successfully
+    Steps remaining:                          17
+    Elapsed time:                     3.0000    
+    Time remaining:                   7.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.727957D-17
+  Generalized Force norm        0.102614D-01
+  Out of balance force norm     0.960572D-14
+  Ratio                         0.936102D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number     4 has completed successfully
+    Steps remaining:                          16
+    Elapsed time:                     4.0000    
+    Time remaining:                   6.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.151980D-16
+  Generalized Force norm        0.128268D-01
+  Out of balance force norm     0.963641D-14
+  Ratio                         0.751275D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number     5 has completed successfully
+    Steps remaining:                          15
+    Elapsed time:                     5.0000    
+    Time remaining:                   5.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.197036D-16
+  Generalized Force norm        0.153921D-01
+  Out of balance force norm     0.980318D-14
+  Ratio                         0.636897D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number     6 has completed successfully
+    Steps remaining:                          14
+    Elapsed time:                     6.0000    
+    Time remaining:                   4.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.158821D-16
+  Generalized Force norm        0.179575D-01
+  Out of balance force norm     0.103709D-13
+  Ratio                         0.577528D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number     7 has completed successfully
+    Steps remaining:                          13
+    Elapsed time:                     7.0000    
+    Time remaining:                   3.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.202086D-16
+  Generalized Force norm        0.205228D-01
+  Out of balance force norm     0.100131D-13
+  Ratio                         0.487902D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number     8 has completed successfully
+    Steps remaining:                          12
+    Elapsed time:                     8.0000    
+    Time remaining:                   2.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.259965D-16
+  Generalized Force norm        0.230882D-01
+  Out of balance force norm     0.106629D-13
+  Ratio                         0.461835D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number     9 has completed successfully
+    Steps remaining:                          11
+    Elapsed time:                     9.0000    
+    Time remaining:                   1.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4075E+05
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4075E+05
+      Maximum no. diagonal digits lost:   5
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.306175D-16
+  Generalized Force norm        0.256535D-01
+  Out of balance force norm     0.111674D-13
+  Ratio                         0.435319D-12
+  Tolerance                     0.100000D-04
+
+
+    Step number    10 has completed successfully
+    Steps remaining:                          10
+    Elapsed time:                     10.000    
+    Time remaining:                   0.0000    
+    Time step has been adjusted to:   0.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.9200E-04
+      Min diagonal in reduced matrix:    0.5672E-05
+      Ratio:                             0.1622E+02
+      Maximum no. diagonal digits lost:   1
+
+  Column            1  node            1  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.76494D+03 Numerical deriv     0.76494D+03
+ Row    2 node    1 DOF    2 Stiffness     0.24614D+04 Numerical deriv     0.24614D+04
+ Row    3 node    2 DOF    1 Stiffness     0.80278D+03 Numerical deriv     0.80278D+03
+ Row    4 node    2 DOF    2 Stiffness     0.64858D+02 Numerical deriv     0.64858D+02
+ Row    5 node    3 DOF    1 Stiffness    -0.63480D+03 Numerical deriv    -0.63480D+03
+ Row    6 node    3 DOF    2 Stiffness     0.80752D+03 Numerical deriv     0.80752D+03
+ Row    7 node    4 DOF    1 Stiffness    -0.34287D+04 Numerical deriv    -0.34287D+04
+ Row    8 node    4 DOF    2 Stiffness    -0.22556D+03 Numerical deriv    -0.22556D+03
+ Row    9 node    5 DOF    1 Stiffness     0.10302D+03 Numerical deriv     0.10302D+03
+ Row   10 node    5 DOF    2 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row   11 node    6 DOF    1 Stiffness     0.23928D+04 Numerical deriv     0.23928D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.30887D+04 Numerical deriv    -0.30887D+04
+
+  Column            2  node            1  DOF            2
+ Row    1 node    1 DOF    1 Stiffness     0.24614D+04 Numerical deriv     0.24614D+04
+ Row    2 node    1 DOF    2 Stiffness     0.81328D+04 Numerical deriv     0.81328D+04
+ Row    3 node    2 DOF    1 Stiffness     0.28334D+04 Numerical deriv     0.28334D+04
+ Row    4 node    2 DOF    2 Stiffness     0.21341D+03 Numerical deriv     0.21341D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.19610D+04 Numerical deriv    -0.19610D+04
+ Row    6 node    3 DOF    2 Stiffness     0.25053D+04 Numerical deriv     0.25053D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.11300D+05 Numerical deriv    -0.11300D+05
+ Row    8 node    4 DOF    2 Stiffness    -0.88010D+03 Numerical deriv    -0.88010D+03
+ Row    9 node    5 DOF    1 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row   10 node    5 DOF    2 Stiffness     0.10879D+03 Numerical deriv     0.10879D+03
+ Row   11 node    6 DOF    1 Stiffness     0.79853D+04 Numerical deriv     0.79853D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.10080D+05 Numerical deriv    -0.10080D+05
+
+  Column            3  node            2  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.80278D+03 Numerical deriv     0.80278D+03
+ Row    2 node    1 DOF    2 Stiffness     0.28334D+04 Numerical deriv     0.28334D+04
+ Row    3 node    2 DOF    1 Stiffness     0.85191D+04 Numerical deriv     0.85191D+04
+ Row    4 node    2 DOF    2 Stiffness     0.69451D+03 Numerical deriv     0.69451D+03
+ Row    5 node    3 DOF    1 Stiffness     0.20676D+04 Numerical deriv     0.20676D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.26202D+04 Numerical deriv    -0.26202D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.30265D+04 Numerical deriv    -0.30265D+04
+ Row    8 node    4 DOF    2 Stiffness    -0.11291D+05 Numerical deriv    -0.11291D+05
+ Row    9 node    5 DOF    1 Stiffness    -0.86628D+04 Numerical deriv    -0.86628D+04
+ Row   10 node    5 DOF    2 Stiffness     0.10425D+05 Numerical deriv     0.10425D+05
+ Row   11 node    6 DOF    1 Stiffness     0.29985D+03 Numerical deriv     0.29985D+03
+ Row   12 node    6 DOF    2 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+
+  Column            4  node            2  DOF            2
+ Row    1 node    1 DOF    1 Stiffness     0.64858D+02 Numerical deriv     0.64858D+02
+ Row    2 node    1 DOF    2 Stiffness     0.21341D+03 Numerical deriv     0.21341D+03
+ Row    3 node    2 DOF    1 Stiffness     0.69451D+03 Numerical deriv     0.69451D+03
+ Row    4 node    2 DOF    2 Stiffness     0.73877D+02 Numerical deriv     0.73877D+02
+ Row    5 node    3 DOF    1 Stiffness     0.14831D+03 Numerical deriv     0.14831D+03
+ Row    6 node    3 DOF    2 Stiffness    -0.19167D+03 Numerical deriv    -0.19167D+03
+ Row    7 node    4 DOF    1 Stiffness    -0.21718D+03 Numerical deriv    -0.21718D+03
+ Row    8 node    4 DOF    2 Stiffness    -0.96899D+03 Numerical deriv    -0.96899D+03
+ Row    9 node    5 DOF    1 Stiffness    -0.64943D+03 Numerical deriv    -0.64943D+03
+ Row   10 node    5 DOF    2 Stiffness     0.88065D+03 Numerical deriv     0.88065D+03
+ Row   11 node    6 DOF    1 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+ Row   12 node    6 DOF    2 Stiffness    -0.72795D+01 Numerical deriv    -0.72795D+01
+
+  Column            5  node            3  DOF            1
+ Row    1 node    1 DOF    1 Stiffness    -0.63480D+03 Numerical deriv    -0.63480D+03
+ Row    2 node    1 DOF    2 Stiffness    -0.19610D+04 Numerical deriv    -0.19610D+04
+ Row    3 node    2 DOF    1 Stiffness     0.20676D+04 Numerical deriv     0.20676D+04
+ Row    4 node    2 DOF    2 Stiffness     0.14831D+03 Numerical deriv     0.14831D+03
+ Row    5 node    3 DOF    1 Stiffness     0.41323D+04 Numerical deriv     0.41323D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.53387D+04 Numerical deriv    -0.53387D+04
+ Row    7 node    4 DOF    1 Stiffness     0.25398D+03 Numerical deriv     0.25398D+03
+ Row    8 node    4 DOF    2 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    9 node    5 DOF    1 Stiffness    -0.83253D+04 Numerical deriv    -0.83253D+04
+ Row   10 node    5 DOF    2 Stiffness    -0.31147D+03 Numerical deriv    -0.31147D+03
+ Row   11 node    6 DOF    1 Stiffness     0.25062D+04 Numerical deriv     0.25062D+04
+ Row   12 node    6 DOF    2 Stiffness     0.76713D+04 Numerical deriv     0.76713D+04
+
+  Column            6  node            3  DOF            2
+ Row    1 node    1 DOF    1 Stiffness     0.80752D+03 Numerical deriv     0.80752D+03
+ Row    2 node    1 DOF    2 Stiffness     0.25053D+04 Numerical deriv     0.25053D+04
+ Row    3 node    2 DOF    1 Stiffness    -0.26202D+04 Numerical deriv    -0.26202D+04
+ Row    4 node    2 DOF    2 Stiffness    -0.19167D+03 Numerical deriv    -0.19167D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.53387D+04 Numerical deriv    -0.53387D+04
+ Row    6 node    3 DOF    2 Stiffness     0.69566D+04 Numerical deriv     0.69566D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    8 node    4 DOF    2 Stiffness     0.12070D+03 Numerical deriv     0.12070D+03
+ Row    9 node    5 DOF    1 Stiffness     0.10763D+05 Numerical deriv     0.10763D+05
+ Row   10 node    5 DOF    2 Stiffness     0.57621D+03 Numerical deriv     0.57621D+03
+ Row   11 node    6 DOF    1 Stiffness    -0.34027D+04 Numerical deriv    -0.34027D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.99672D+04 Numerical deriv    -0.99672D+04
+
+  Column            7  node            4  DOF            1
+ Row    1 node    1 DOF    1 Stiffness    -0.34287D+04 Numerical deriv    -0.34287D+04
+ Row    2 node    1 DOF    2 Stiffness    -0.11300D+05 Numerical deriv    -0.11300D+05
+ Row    3 node    2 DOF    1 Stiffness    -0.30265D+04 Numerical deriv    -0.30265D+04
+ Row    4 node    2 DOF    2 Stiffness    -0.21718D+03 Numerical deriv    -0.21718D+03
+ Row    5 node    3 DOF    1 Stiffness     0.25398D+03 Numerical deriv     0.25398D+03
+ Row    6 node    3 DOF    2 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    7 node    4 DOF    1 Stiffness     0.19039D+05 Numerical deriv     0.19039D+05
+ Row    8 node    4 DOF    2 Stiffness    -0.40501D+04 Numerical deriv    -0.40501D+04
+ Row    9 node    5 DOF    1 Stiffness     0.44632D+04 Numerical deriv     0.44632D+04
+ Row   10 node    5 DOF    2 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row   11 node    6 DOF    1 Stiffness    -0.17301D+05 Numerical deriv    -0.17301D+05
+ Row   12 node    6 DOF    2 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+
+  Column            8  node            4  DOF            2
+ Row    1 node    1 DOF    1 Stiffness    -0.22556D+03 Numerical deriv    -0.22556D+03
+ Row    2 node    1 DOF    2 Stiffness    -0.88010D+03 Numerical deriv    -0.88010D+03
+ Row    3 node    2 DOF    1 Stiffness    -0.11291D+05 Numerical deriv    -0.11291D+05
+ Row    4 node    2 DOF    2 Stiffness    -0.96899D+03 Numerical deriv    -0.96899D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.20847D+03 Numerical deriv    -0.20847D+03
+ Row    6 node    3 DOF    2 Stiffness     0.12070D+03 Numerical deriv     0.12070D+03
+ Row    7 node    4 DOF    1 Stiffness    -0.40501D+04 Numerical deriv    -0.40501D+04
+ Row    8 node    4 DOF    2 Stiffness     0.21269D+05 Numerical deriv     0.21269D+05
+ Row    9 node    5 DOF    1 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row   10 node    5 DOF    2 Stiffness    -0.20961D+05 Numerical deriv    -0.20961D+05
+ Row   11 node    6 DOF    1 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+ Row   12 node    6 DOF    2 Stiffness     0.14208D+04 Numerical deriv     0.14208D+04
+
+  Column            9  node            5  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.10302D+03 Numerical deriv     0.10302D+03
+ Row    2 node    1 DOF    2 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row    3 node    2 DOF    1 Stiffness    -0.86628D+04 Numerical deriv    -0.86628D+04
+ Row    4 node    2 DOF    2 Stiffness    -0.64943D+03 Numerical deriv    -0.64943D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.83253D+04 Numerical deriv    -0.83253D+04
+ Row    6 node    3 DOF    2 Stiffness     0.10763D+05 Numerical deriv     0.10763D+05
+ Row    7 node    4 DOF    1 Stiffness     0.44632D+04 Numerical deriv     0.44632D+04
+ Row    8 node    4 DOF    2 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row    9 node    5 DOF    1 Stiffness     0.20117D+05 Numerical deriv     0.20117D+05
+ Row   10 node    5 DOF    2 Stiffness    -0.39021D+04 Numerical deriv    -0.39021D+04
+ Row   11 node    6 DOF    1 Stiffness    -0.76948D+04 Numerical deriv    -0.76948D+04
+ Row   12 node    6 DOF    2 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+
+  Column           10  node            5  DOF            2
+ Row    1 node    1 DOF    1 Stiffness    -0.19482D+02 Numerical deriv    -0.19482D+02
+ Row    2 node    1 DOF    2 Stiffness     0.10879D+03 Numerical deriv     0.10879D+03
+ Row    3 node    2 DOF    1 Stiffness     0.10425D+05 Numerical deriv     0.10425D+05
+ Row    4 node    2 DOF    2 Stiffness     0.88065D+03 Numerical deriv     0.88065D+03
+ Row    5 node    3 DOF    1 Stiffness    -0.31147D+03 Numerical deriv    -0.31147D+03
+ Row    6 node    3 DOF    2 Stiffness     0.57621D+03 Numerical deriv     0.57621D+03
+ Row    7 node    4 DOF    1 Stiffness     0.55898D+04 Numerical deriv     0.55898D+04
+ Row    8 node    4 DOF    2 Stiffness    -0.20961D+05 Numerical deriv    -0.20961D+05
+ Row    9 node    5 DOF    1 Stiffness    -0.39021D+04 Numerical deriv    -0.39021D+04
+ Row   10 node    5 DOF    2 Stiffness     0.20968D+05 Numerical deriv     0.20968D+05
+ Row   11 node    6 DOF    1 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+ Row   12 node    6 DOF    2 Stiffness    -0.15720D+04 Numerical deriv    -0.15720D+04
+
+  Column           11  node            6  DOF            1
+ Row    1 node    1 DOF    1 Stiffness     0.23928D+04 Numerical deriv     0.23928D+04
+ Row    2 node    1 DOF    2 Stiffness     0.79853D+04 Numerical deriv     0.79853D+04
+ Row    3 node    2 DOF    1 Stiffness     0.29985D+03 Numerical deriv     0.29985D+03
+ Row    4 node    2 DOF    2 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+ Row    5 node    3 DOF    1 Stiffness     0.25062D+04 Numerical deriv     0.25062D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.34027D+04 Numerical deriv    -0.34027D+04
+ Row    7 node    4 DOF    1 Stiffness    -0.17301D+05 Numerical deriv    -0.17301D+05
+ Row    8 node    4 DOF    2 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+ Row    9 node    5 DOF    1 Stiffness    -0.76948D+04 Numerical deriv    -0.76948D+04
+ Row   10 node    5 DOF    2 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+ Row   11 node    6 DOF    1 Stiffness     0.19797D+05 Numerical deriv     0.19797D+05
+ Row   12 node    6 DOF    2 Stiffness    -0.29457D+04 Numerical deriv    -0.29457D+04
+
+  Column           12  node            6  DOF            2
+ Row    1 node    1 DOF    1 Stiffness    -0.30887D+04 Numerical deriv    -0.30887D+04
+ Row    2 node    1 DOF    2 Stiffness    -0.10080D+05 Numerical deriv    -0.10080D+05
+ Row    3 node    2 DOF    1 Stiffness    -0.41064D+02 Numerical deriv    -0.41064D+02
+ Row    4 node    2 DOF    2 Stiffness    -0.72795D+01 Numerical deriv    -0.72795D+01
+ Row    5 node    3 DOF    1 Stiffness     0.76713D+04 Numerical deriv     0.76713D+04
+ Row    6 node    3 DOF    2 Stiffness    -0.99672D+04 Numerical deriv    -0.99672D+04
+ Row    7 node    4 DOF    1 Stiffness     0.10186D+05 Numerical deriv     0.10186D+05
+ Row    8 node    4 DOF    2 Stiffness     0.14208D+04 Numerical deriv     0.14208D+04
+ Row    9 node    5 DOF    1 Stiffness    -0.11781D+05 Numerical deriv    -0.11781D+05
+ Row   10 node    5 DOF    2 Stiffness    -0.15720D+04 Numerical deriv    -0.15720D+04
+ Row   11 node    6 DOF    1 Stiffness    -0.29457D+04 Numerical deriv    -0.29457D+04
+ Row   12 node    6 DOF    2 Stiffness     0.20206D+05 Numerical deriv     0.20206D+05
+
+
+ Stiffness matrix is consistent with residual 
+
+

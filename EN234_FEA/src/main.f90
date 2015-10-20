@@ -62,8 +62,25 @@ program en234fea
    outfil(3) = './output_files/Holeplate_3d.out'
       infil(4) = './input_files/Holeplate_3d_Bbar.in'
    outfil(4) = './output_files/Holeplate_3d_Bbar.out'
+      infil(5) = './input_files/Linear_elastic_2d_planestrain.in'
+  outfil(5) = './output_files/Linear_elastic_2d_planestrain.out'
+      infil(6) = './input_files/Linear_elastic_2d_planestrain_Bbar.in'
+   outfil(6) = './output_files/Linear_elastic_2d_planestrain_Bbar.out'
+      infil(7) = './input_files/Linear_elastic_2d_planestress.in'
+   outfil(7) = './output_files/Linear_elastic_2d_planestress.out'
+      infil(8) = './input_files/Linear_elastic_2d_planestress_Bbar.in'
+   outfil(8) = './output_files/Linear_elastic_2d_planestress_Bbar.out'
+      infil(9) = './input_files/Holeplate_2d_tri6_pstress.in'
+   outfil(9) = './output_files/Holeplate_2d_tri6_pstress.out'
+      infil(10) = './input_files/Holeplate_2d_tri6_pstress_Bbar.in'
+   outfil(10) = './output_files/Holeplate_2d_tri6_pstress_Bbar.out'
+      infil(11) = './input_files/Holeplate_2d_tri6.in'
+   outfil(11) = './output_files/Holeplate_2d_tri6.out'
+      infil(12) = './input_files/Holeplate_2d_tri6_Bbar.in'
+   outfil(12) = './output_files/Holeplate_2d_tri6_Bbar.out'
+
   ! write(*,*) infil
-  do num_kk =1,4
+  do num_kk =1,12
    write(*,*) 'LOOP'
     open (unit = IOR, file = infil(num_kk), status = 'old', ERR=500)
     open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)

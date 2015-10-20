@@ -100,7 +100,8 @@ subroutine el_linelast_2d_planestrain(lmn, element_identifier, n_nodes, node_pro
     D(1,1) = d11
     D(2,2) = d11
     D(3,3) = d44
-
+    el_vol = 0.d0
+    dNbardx = 0.d0
    !     -- Loop over the integration points for B bar method
     do kint = 1, n_points
        call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
@@ -268,7 +269,9 @@ subroutine el_linelast_2d_planestress(lmn, element_identifier, n_nodes, node_pro
     D(2,2) = d11
     D(3,3) = d44
 
-     !     -- Loop over the integration points for B bar method
+    el_vol = 0.d0
+    dNbardx = 0.d0
+   !     -- Loop over the integration points for B bar method
     do kint = 1, n_points
        call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
         dxdxi = matmul(x(1:2,1:n_nodes),dNdxi(1:n_nodes,1:2))
@@ -291,7 +294,6 @@ subroutine el_linelast_2d_planestress(lmn, element_identifier, n_nodes, node_pro
          end do
        end do
 
-
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
@@ -299,6 +301,8 @@ subroutine el_linelast_2d_planestress(lmn, element_identifier, n_nodes, node_pro
         call invert_small(dxdxi,dxidx,determinant)
         dNdx(1:n_nodes,1:2) = matmul(dNdxi(1:n_nodes,1:2),dxidx)
         B = 0.d0
+        temp = 0.d0
+        Bbar = 0.d0
         B(1,1:2*n_nodes-1:2) = dNdx(1:n_nodes,1)
         B(2,2:2*n_nodes:2) = dNdx(1:n_nodes,2)
         B(3,1:2*n_nodes-1:2) = dNdx(1:n_nodes,2)
@@ -310,27 +314,26 @@ subroutine el_linelast_2d_planestress(lmn, element_identifier, n_nodes, node_pro
         end do
 
         Bbar = B + 1.d0/2.d0 *temp
-
         if ( element_identifier == 102 ) then
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
-
         stress = matmul(D,strain+dstrain)
+
         element_residual(1:2*n_nodes) = element_residual(1:2*n_nodes) - matmul(transpose(B),stress)*w(kint)*determinant
 
         element_stiffness(1:2*n_nodes,1:2*n_nodes) = element_stiffness(1:2*n_nodes,1:2*n_nodes) &
             + matmul(transpose(B(1:3,1:2*n_nodes)),matmul(D,B(1:3,1:2*n_nodes)))*w(kint)*determinant
+
         else if ( element_identifier == 202 ) then
         strain = matmul(Bbar,dof_total)
         dstrain = matmul(Bbar,dof_increment)
-
         stress = matmul(D,strain+dstrain)
+
         element_residual(1:2*n_nodes) = element_residual(1:2*n_nodes) - matmul(transpose(Bbar),stress)*w(kint)*determinant
 
         element_stiffness(1:2*n_nodes,1:2*n_nodes) = element_stiffness(1:2*n_nodes,1:2*n_nodes) &
             + matmul(transpose(Bbar(1:3,1:2*n_nodes)),matmul(D,Bbar(1:3,1:2*n_nodes)))*w(kint)*determinant
         end if
-
     end do
 
     return
@@ -436,6 +439,9 @@ subroutine fieldvars_linelast_2d_planestrain(lmn, element_identifier, n_nodes, n
     D(1,1) = d11
     D(2,2) = d11
     D(3,3) = d44
+
+    el_vol = 0.d0
+    dNbardx = 0.d0
      !     -- Loop over the integration points for B bar method
     do kint = 1, n_points
        call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
@@ -651,7 +657,8 @@ subroutine fieldvars_linelast_2d_planestress(lmn, element_identifier, n_nodes, n
     D(2,2) = d11
     D(3,3) = d44
 
-
+    el_vol = 0.d0
+    dNbardx = 0.d0
     !     -- Loop over the integration points for B bar method
     do kint = 1, n_points
        call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
@@ -682,6 +689,8 @@ subroutine fieldvars_linelast_2d_planestress(lmn, element_identifier, n_nodes, n
         call invert_small(dxdxi,dxidx,determinant)
         dNdx(1:n_nodes,1:2) = matmul(dNdxi(1:n_nodes,1:2),dxidx)
         B = 0.d0
+        temp = 0.d0
+        Bbar = 0.d0
         B(1,1:2*n_nodes-1:2) = dNdx(1:n_nodes,1)
         B(2,2:2*n_nodes:2) = dNdx(1:n_nodes,2)
         B(3,1:2*n_nodes-1:2) = dNdx(1:n_nodes,2)

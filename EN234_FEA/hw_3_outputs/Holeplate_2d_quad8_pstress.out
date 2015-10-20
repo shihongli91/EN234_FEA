@@ -1,0 +1,345 @@
+
+
+ The input file has been read successfully 
+ Number of elements:              250
+ Number of nodes:                 811
+ Number of constraints:             0
+ Total no. degrees of freedom:   1622
+
+
+ Direct Solver Profiler has completed profile computation 
+     Total number of equations       1622
+     Maximum half bandwidth:          129
+     Mean half bandwidth:              76
+     RMS half bandwidth:               82
+     Size of stiffness matrix:     122635
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.196300D-02
+  Generalized Force norm        0.185368D-02
+  Out of balance force norm     0.258642D-15
+  Ratio                         0.677661D-13
+  Tolerance                     0.100000D-04
+
+
+    Step number     1 has completed successfully
+    Steps remaining:                          19
+    Elapsed time:                     1.0000    
+    Time remaining:                   9.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.247398D-16
+  Generalized Force norm        0.370737D-02
+  Out of balance force norm     0.570076D-16
+  Ratio                         0.153768D-13
+  Tolerance                     0.100000D-04
+
+
+    Step number     2 has completed successfully
+    Steps remaining:                          18
+    Elapsed time:                     2.0000    
+    Time remaining:                   8.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.123972D-16
+  Generalized Force norm        0.556105D-02
+  Out of balance force norm     0.571226D-16
+  Ratio                         0.102719D-13
+  Tolerance                     0.100000D-04
+
+
+    Step number     3 has completed successfully
+    Steps remaining:                          17
+    Elapsed time:                     3.0000    
+    Time remaining:                   7.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.136425D-17
+  Generalized Force norm        0.741474D-02
+  Out of balance force norm     0.509081D-16
+  Ratio                         0.686580D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     4 has completed successfully
+    Steps remaining:                          16
+    Elapsed time:                     4.0000    
+    Time remaining:                   6.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.176669D-17
+  Generalized Force norm        0.926842D-02
+  Out of balance force norm     0.519332D-16
+  Ratio                         0.560324D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     5 has completed successfully
+    Steps remaining:                          15
+    Elapsed time:                     5.0000    
+    Time remaining:                   5.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.186561D-17
+  Generalized Force norm        0.111221D-01
+  Out of balance force norm     0.549359D-16
+  Ratio                         0.493935D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     6 has completed successfully
+    Steps remaining:                          14
+    Elapsed time:                     6.0000    
+    Time remaining:                   4.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.230342D-17
+  Generalized Force norm        0.129758D-01
+  Out of balance force norm     0.573487D-16
+  Ratio                         0.441967D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     7 has completed successfully
+    Steps remaining:                          13
+    Elapsed time:                     7.0000    
+    Time remaining:                   3.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.282305D-17
+  Generalized Force norm        0.148295D-01
+  Out of balance force norm     0.537329D-16
+  Ratio                         0.362338D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     8 has completed successfully
+    Steps remaining:                          12
+    Elapsed time:                     8.0000    
+    Time remaining:                   2.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.323514D-17
+  Generalized Force norm        0.166832D-01
+  Out of balance force norm     0.558311D-16
+  Ratio                         0.334655D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     9 has completed successfully
+    Steps remaining:                          11
+    Elapsed time:                     9.0000    
+    Time remaining:                   1.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.4860E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.4860E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.547703D-17
+  Generalized Force norm        0.185368D-01
+  Out of balance force norm     0.624596D-16
+  Ratio                         0.336949D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number    10 has completed successfully
+    Steps remaining:                          10
+    Elapsed time:                     10.000    
+    Time remaining:                   0.0000    
+    Time step has been adjusted to:   0.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.1253E-03
+      Min diagonal in reduced matrix:    0.8281E-05
+      Ratio:                             0.1513E+02
+      Maximum no. diagonal digits lost:   0

@@ -121,6 +121,7 @@ subroutine el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_l
     !   Get the average element volume
         el_vol = el_vol + w(kint)*determinant
     end do
+
     !   Get the final form of vol_avg_shape function derivatives
        do m_count = 1,n_nodes
          do n_count = 1,3
@@ -178,7 +179,7 @@ subroutine el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_l
        end if
 
     end do
-  
+
     return
 end subroutine el_linelast_3dbasic
 
@@ -488,19 +489,19 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
             else if (strcmp(field_variable_names(k),'S23',3) ) then
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(6)*N(1:n_nodes)*determinant*w(kint)
             else if (strcmp(field_variable_names(k),'E11',3) ) then
-                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(1)*N(1:n_nodes)*determinant*w(kint)
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + strain(1)*N(1:n_nodes)*determinant*w(kint)
             else if (strcmp(field_variable_names(k),'E22',3) ) then
-                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(2)*N(1:n_nodes)*determinant*w(kint)
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + strain(2)*N(1:n_nodes)*determinant*w(kint)
             else if (strcmp(field_variable_names(k),'E33',3) ) then
-                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(3)*N(1:n_nodes)*determinant*w(kint)
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + strain(3)*N(1:n_nodes)*determinant*w(kint)
             else if (strcmp(field_variable_names(k),'E12',3) ) then
-                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(4)/0.5d0*N(1:n_nodes)*determinant &
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + strain(4)/0.5d0*N(1:n_nodes)*determinant &
                 *w(kint)
             else if (strcmp(field_variable_names(k),'E13',3) ) then
-                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(5)/0.5d0*N(1:n_nodes)*determinant &
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + strain(5)/0.5d0*N(1:n_nodes)*determinant &
                 *w(kint)
             else if (strcmp(field_variable_names(k),'E23',3) ) then
-                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(6)/0.5d0*N(1:n_nodes)*determinant &
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + strain(6)/0.5d0*N(1:n_nodes)*determinant &
                 *w(kint)
             else if (strcmp(field_variable_names(k),'SMISES',6) ) then
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + smises*N(1:n_nodes)*determinant*w(kint)
