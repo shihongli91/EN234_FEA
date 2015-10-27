@@ -20,9 +20,9 @@ subroutine user_print(n_steps)
   real(prec) :: Stress_Intensity_factor                                      ! Stress_Intensity_factor
   real (prec), allocatable ::   vol_averaged_state_variables(:)              ! Volume averaged state variables in an element
 
- call compute_J_integral(J_integral_value, Stress_Intensity_factor)
- write(user_print_units(1),'(A)') 'J integral value, Stress Intensity factor'
- write(user_print_units(1),'(2(d12.5))') J_integral_value, Stress_Intensity_factor
+! call compute_J_integral(J_integral_value, Stress_Intensity_factor)
+!write(user_print_units(1),'(A)') 'J integral value, Stress Intensity factor'
+! write(user_print_units(1),'(2(d12.5))') J_integral_value, Stress_Intensity_factor
 
 !
 !  Use this file to process or print time histories of the solution, or to print a non-standard mesh.
@@ -33,20 +33,23 @@ subroutine user_print(n_steps)
 !
 !
 
-!   allocate(vol_averaged_state_variables(length_state_variable_array), stat=status)
-!
-!   if (status/=0) then
-!      write(IOW,*) ' Error in subroutine user_print'
-!      write(IOW,*) ' Unable to allocate memory for state variables '
-!      stop
-!   endif
-!
-!   lmn = int(user_print_parameters(1))     ! The element number
-!
-!   call compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_averaged_state_variables,length_state_variable_array, &
-!                                                       n_state_vars_per_intpt)
-!
-!
+   allocate(vol_averaged_state_variables(length_state_variable_array), stat=status)
+
+   if (status/=0) then
+      write(IOW,*) ' Error in subroutine user_print'
+      write(IOW,*) ' Unable to allocate memory for state variables '
+      stop
+   endif
+
+   lmn = int(user_print_parameters(1))     ! The element number
+
+   call compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_averaged_state_variables,length_state_variable_array, &
+                                                       n_state_vars_per_intpt)
+
+ write(user_print_units(1),'(A)') 'VARIABLES = e11,S11'
+
+ write(user_print_units(1),'(13(1x,D12.5))') vol_averaged_strain(1), vol_averaged_state_variables(1)- &
+                                                                     vol_averaged_state_variables(7)
 !    if (TIME<1.d-12) then
 !      if (n_state_vars_per_intpt<6) then
 !        write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23'
@@ -54,7 +57,6 @@ subroutine user_print(n_steps)
 !         write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23,s11,s22,s33,s12,s13,s23'
 !      endif
 !    endif
-!
 !   if (n_state_vars_per_intpt<6) then
 !      write(user_print_units(1),'(7(1x,D12.5))') TIME+DTIME,vol_averaged_strain(1:6)
 !   else

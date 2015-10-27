@@ -37,7 +37,7 @@
 %     The parameters are no. nodes on the element, total no. state variables (no. material state vars * no. integration points), integer identifier
 
       ELEMENTS
-        PARAMETERS, 8, 120, 2001
+        PARAMETERS, 8, 104, 3001
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio, initial yield stress, hardening rate c, nonlinear parameter gamma
         PROPERTIES
@@ -65,9 +65,9 @@
 %       The HISTORY key defines a time history that can be applied to DOFs or distributed loads
         HISTORY, dof_history
           0.d0, 0.d0                  % Each line gives a time value and then a function value
-         1.d0, 0.1d0
-         2.d0, -.1d0
-         3.d0, 0.1d0
+         1.d0, 0.4d0
+         2.d0, -.4d0
+         3.d0, 0.4d0
         END HISTORY
 
         HISTORY, dload_history
@@ -119,7 +119,7 @@
 %           element set, face #, SUBROUTINE, subroutine parameter name
 
         DISTRIBUTED LOADS
-         end_element, 4, HISTORY,dload_history, 1.d0,0.d0,0.d0
+        end_element, 4, HISTORY,dload_history, 1.d0,0.d0,0.d0
         END DISTRIBUTED LOADS
 
 
@@ -137,7 +137,7 @@
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-%       CHECK STIFFNESS, 2001
+       CHECK STIFFNESS, 3001
 
 
 
@@ -179,7 +179,7 @@
 %         In this example the states are the stresses sxx,syy,szz,sxy,sxz,syz
          PRINT STATE, Output_files\contourplots.dat
             DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12,S13,S23
+            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,E11,E22,E33,E12,E13,E23,SMISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE

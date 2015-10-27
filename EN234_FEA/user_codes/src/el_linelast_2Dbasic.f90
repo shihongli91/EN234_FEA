@@ -145,6 +145,7 @@ subroutine el_linelast_2d_planestrain(lmn, element_identifier, n_nodes, node_pro
         end do
 
         Bbar = B + 1.d0/2.d0 *temp
+
         if ( element_identifier == 101 ) then
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)

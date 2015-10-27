@@ -81,6 +81,14 @@ subroutine user_element_static(lmn, element_identifier, n_nodes, node_property_l
     n_state_variables, initial_state_variables, &                                                ! Input variables
     updated_state_variables,element_stiffness,element_residual, fail)      ! Output variables
   
+   else if ( element_identifier ==3001  .or. element_identifier == 4001) then           ! Stub for a 2D_plane stress element
+
+        call el_kinematic_viscoplasticity_3Dbasic(lmn, element_identifier, n_nodes, node_property_list, & ! Input variables
+    n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
+    dof_increment, dof_total, length_dof_array, &                                                ! Input variables
+    n_state_variables, initial_state_variables, &                                                ! Input variables
+    updated_state_variables,element_stiffness,element_residual, fail)                            ! Output variables
+
     else
         write (IOW, 99001) element_identifier
         stop
@@ -241,6 +249,14 @@ subroutine user_element_fieldvariables(lmn, element_identifier, n_nodes, node_pr
 
         else if ( element_identifier == 102 .or. element_identifier == 202   ) then !  2d plane stress problem
             call fieldvars_linelast_2d_planestress(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
+                n_properties, element_properties,element_coords, length_coord_array, &                                   ! Input variables
+                dof_increment, dof_total, length_dof_array, &                                                            ! Input variables
+                n_state_variables, initial_state_variables,updated_state_variables, &                                    ! Input variables
+                n_field_variables,field_variable_names, &                                                                ! Field variable definition
+                nodal_fieldvariables)      ! Output variables
+
+        else if ( element_identifier == 3001 .or. element_identifier == 4001   ) then !  2d plane stress problem
+            call fieldvars_3d_kinematic_plasticity(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
                 n_properties, element_properties,element_coords, length_coord_array, &                                   ! Input variables
                 dof_increment, dof_total, length_dof_array, &                                                            ! Input variables
                 n_state_variables, initial_state_variables,updated_state_variables, &                                    ! Input variables
