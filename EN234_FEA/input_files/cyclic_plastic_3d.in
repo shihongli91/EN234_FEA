@@ -41,7 +41,7 @@
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio, initial yield stress, hardening rate c, nonlinear parameter gamma
         PROPERTIES
-         500.d0, 0.3d0, 10.d0, 50.d0, 3.d0
+         500.d0, 0.3d0, 10.d0, 50.d0, 0.d0
         END PROPERTIES
 %     Define mass density (for explicity dynamics only)
 %       DENSITY, 10.d0

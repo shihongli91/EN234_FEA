@@ -46,23 +46,24 @@ subroutine user_print(n_steps)
    call compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_averaged_state_variables,length_state_variable_array, &
                                                        n_state_vars_per_intpt)
 
- write(user_print_units(1),'(A)') 'VARIABLES =TIME,   e11,    S11'
 
- write(user_print_units(1),'(13(1x,D12.5))')TIME+DTIME, vol_averaged_strain(1), ( vol_averaged_state_variables(1)- &
+
+
+    if (TIME<1.d-12) then
+      if (n_state_vars_per_intpt<6) then
+        write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23'
+      else
+        ! write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23,s11,s22,s33,s12,s13,s23'
+        write(user_print_units(1),'(A)') 'VARIABLES =TIME,   e11,    S11'
+      endif
+    endif
+   if (n_state_vars_per_intpt<6) then
+      write(user_print_units(1),'(7(1x,D12.5))') TIME+DTIME,vol_averaged_strain(1:6)
+   else
+      ! write(user_print_units(1),'(13(1x,D12.5))') TIME+DTIME,vol_averaged_strain(1:6),vol_averaged_state_variables(1:6)
+      write(user_print_units(1),'(13(1x,D12.5))')TIME+DTIME, vol_averaged_strain(1), ( vol_averaged_state_variables(1)- &
                                                                      vol_averaged_state_variables(7))
-!    if (TIME<1.d-12) then
-!      if (n_state_vars_per_intpt<6) then
-!        write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23'
-!      else
-!         write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23,s11,s22,s33,s12,s13,s23'
-!      endif
-!    endif
-!   if (n_state_vars_per_intpt<6) then
-!      write(user_print_units(1),'(7(1x,D12.5))') TIME+DTIME,vol_averaged_strain(1:6)
-!   else
-!      vol_averaged_state_variables(1:3) = vol_averaged_state_variables(1:3) + vol_averaged_state_variables(7)
-!      write(user_print_units(1),'(13(1x,D12.5))') TIME+DTIME,vol_averaged_strain(1:6),vol_averaged_state_variables(1:6)
-!   endif
+   endif
 
 
 
