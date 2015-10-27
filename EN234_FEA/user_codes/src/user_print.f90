@@ -46,10 +46,10 @@ subroutine user_print(n_steps)
    call compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_averaged_state_variables,length_state_variable_array, &
                                                        n_state_vars_per_intpt)
 
- write(user_print_units(1),'(A)') 'VARIABLES = e11,S11'
+ write(user_print_units(1),'(A)') 'VARIABLES =TIME,   e11,    S11'
 
- write(user_print_units(1),'(13(1x,D12.5))') vol_averaged_strain(1), vol_averaged_state_variables(1)- &
-                                                                     vol_averaged_state_variables(7)
+ write(user_print_units(1),'(13(1x,D12.5))')TIME+DTIME, vol_averaged_strain(1), ( vol_averaged_state_variables(1)- &
+                                                                     vol_averaged_state_variables(7))
 !    if (TIME<1.d-12) then
 !      if (n_state_vars_per_intpt<6) then
 !        write(user_print_units(1),'(A)') 'VARIABLES = TIME,e11,e22,e33,e12,e13,e23'
@@ -195,6 +195,9 @@ subroutine compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_average
         dstrain = matmul(B(1:6,1:3*n_nodes),dof_increment(1:3*n_nodes))
 
         vol_averaged_strain(1:6) = vol_averaged_strain(1:6) + (strain(1:6)+dstrain(1:6))*w(kint)*determinant
+!         write(*,*) 'updated_state_variables'
+!         write(*,*) updated_state_variables(1)-updated_state_variables(7)
+!         write(*,*) ' '
 
         if (n_state_vars_per_intpt>0) then
            vol_averaged_state_vars(1:n_state_vars_per_intpt) = vol_averaged_state_vars(1:n_state_vars_per_intpt) &

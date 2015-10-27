@@ -58,7 +58,7 @@ subroutine el_kinematic_viscoplasticity_3Dbasic(lmn, element_identifier, n_nodes
           
 
     ! Local Variables
-    integer      :: n_points,kint,m_count, n_count,i,j,k,l,a,jj,iter,maxit
+    integer      :: n_points,kint,m_count, n_count,i,j,a,jj
 
     real (prec)  ::  strain(6), dstrain(6)             ! Strain vector contains [e11, e22, e33, 2e12, 2e13, 2e23]
     real (prec)  ::  stress(6)                         ! Stress vector contains [s11, s22, s33, s12, s13, s23]
@@ -70,32 +70,9 @@ subroutine el_kinematic_viscoplasticity_3Dbasic(lmn, element_identifier, n_nodes
     real (prec)  ::  dxidx(3,3), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(3,length_coord_array/3)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  ::  ddisp(3,length_coord_array/3)     ! Re-shaped displacement array disp(i,a) is ith coord of ath node
-    real (prec)  ::  E, xnu, D44, D11, D12,Y0,c_prop,gamma_prop             ! Material properties
-    real (prec)  ::  Iden(3,3),S_tr(3,3),alpha_t(3,3),S_t(3,3),press_t,sig_t(3,3),Sbar_tr
-    real (prec)  ::  sdev0(6),sdev(6),press0,press,alpha0(6),alpha(6)
-    real (prec)  ::  S_tau(3,3),press_tau,alpha_tau(3,3),sig_tau(3,3)
-    real (prec)  ::  deps(3,3),deps0(3,3),tr_deps
-    real (prec)  ::  F_tr,F_fun,dFde,error,delta_mage,tol,delta_mage_new,ita,lamda,ditade,dlamdade,beta
-    real (prec)  ::  temp1,temp2,temp3,temp4,temp5,temp6,temp7,Ctang(3,3,3,3)
-    real (prec)  ::  third,examine,Sbar_tau
+    real (prec)  ::  deps(3,3)                          ! strain increment tensor
     !
-    !     Subroutine to compute element stiffness matrix and residual force vector for 3D linear elastic elements
-    !     El props are:
 
-    !     element_properties(1)         Young's modulus
-    !     element_properties(2)         Poisson's ratio
-    !     element_properties(3)         Initial yield stress
-    !     element_properties(4)         Hardening rate c
-    !     element_properties(5)         Nonlinear parameter gamma
-    ! Utilities
-      third = 1.d0/3.d0
-    ! Pass material properties in
-
-       E          = element_properties(1)
-       xnu        = element_properties(2)
-       Y0         = element_properties(3)
-       c_prop     = element_properties(4)
-       gamma_prop = element_properties(5)
 
     fail = .false.
     
@@ -143,13 +120,9 @@ subroutine el_kinematic_viscoplasticity_3Dbasic(lmn, element_identifier, n_nodes
        end do
  ! ******************************************************************************************
          !     --  Loop over integration points
-    Iden = 0.d0
-    do i=1,3
-       Iden(i,i)=1.0d0
-    end do
-
+    jj = 0 ! jj is used for tracking the state variables
     do kint = 1, n_points
-        jj = 0 ! jj is used for tracking the state variables
+
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
         dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
         call invert_small(dxdxi,dxidx,determinant)
@@ -175,246 +148,19 @@ subroutine el_kinematic_viscoplasticity_3Dbasic(lmn, element_identifier, n_nodes
         end do
 
         Bbar = B + 1.d0/3.d0 *temp
-     !      obtian the state variables at step N
-        sdev0  = initial_state_variables(1+jj:6+jj)
-        press0 = initial_state_variables(7+jj)
-        alpha0 = initial_state_variables(8+jj:13+jj)
-     !      Construct them into matrix form for further calculation
-           press_t = press0
-
+     !  calculate the strain increment
+        deps = 0.d0
         do i=1,3
-           S_t(i,i)= sdev0(i)
-           alpha_t(i,i) = alpha0(i)
-        end do
-           S_t(1,2) = sdev0(4)
-           S_t(2,1) = S_t(1,2)
-           S_t(1,3) = sdev0(5)
-           S_t(3,1) = S_t(1,3)
-           S_t(2,3) = sdev0(6)
-           S_t(3,2) = S_t(2,3)
-
-          alpha_t(1,2) = alpha0(4)
-          alpha_t(2,1) = alpha_t(1,2)
-          alpha_t(1,3) = alpha0(5)
-          alpha_t(3,1) = alpha_t(1,3)
-          alpha_t(2,3) = alpha0(6)
-          alpha_t(3,2) = alpha_t(2,3)
-
-
-  !**********************************************************************************
-    !  Meterial properties
-  !**********************************************************************************
-
-    deps = 0.d0
-    do i=1,3
-       do j=1,3
-          do a = 1, n_nodes
-             deps(i,j) = deps(i,j) + 0.5d0 *(dNdx(a,j)*ddisp(i,a)+dNdx(a,i)*ddisp(j,a))
-          end do
-       end do
-    end do
-
-   ! Step 1. Compute the deviatoric strain increment
-      tr_deps= deps(1,1)+deps(2,2)+deps(3,3)
-      deps0 = deps - third*tr_deps*Iden
-   ! Step 2. Calculate the 'elastic predictor' S_tr and effectice stress Sbar_tr at the end of the increment
-      S_tr = S_t + E/(1+xnu)*deps0
-      Sbar_tr = 0.d0
-      do i=1,3
-        do j=1,3
-          Sbar_tr = Sbar_tr + 1.5d0*(S_tr(i,j)-alpha_t(i,j))*(S_tr(i,j)-alpha_t(i,j))
-        end do
-      end do
-      Sbar_tr = dsqrt(Sbar_tr)
-
-   ! Step 3. Check whether this is a elastic or plastic step by yield criterion
-      F_tr = Sbar_tr - Y0
-    if ( F_tr .LE. 0.d0) then! elastic step
-     ! write(*,*) 'elastic in'
-      ! return elastic tangents and trial stress as its true stress at the end of the step.
-      ! Update the internal variables
-       alpha_tau = alpha_t
-       S_tau = S_tr
-       press_tau = press_t - tr_deps* E/(1.d0-2.d0*xnu)*third
-
-      ! Update the material mechanical tangent modulus
-       D = 0.d0
-       d44 = 0.5D0*E/(1+xnu)
-       d11 = (1.D0-xnu)*E/( (1+xnu)*(1-2.D0*xnu) )
-       d12 = xnu*E/( (1+xnu)*(1-2.D0*xnu) )
-       D(1:3,1:3) = d12
-       D(1,1) = d11
-       D(2,2) = d11
-       D(3,3) = d11
-       D(4,4) = d44
-       D(5,5) = d44
-       D(6,6) = d44
-     ! Update stress
-       sig_tau = S_tau - press_tau*Iden
-
-    else ! plastic step
-    ! write(*,*) 'plastic in '
-     ! Step.4 Solve the plastic strain increment
-      delta_mage = 1.0d-15
-      error = Y0
-      tol = 1.d-8 * Y0
-      iter = 1
-      maxit = 50
-     do while(error .GT. tol)
-
-          temp1 = (1.5d0*E/(1+xnu)+c_prop/(1.d0 + gamma_prop*delta_mage))
-
-          temp2 = 0.d0
-          do i=1,3
-             do j=1,3
-              temp2 = temp2+1.5d0* (S_tr(i,j)-alpha_t(i,j)/(1.d0 + gamma_prop*delta_mage)) &
-                            *(S_tr(i,j)-alpha_t(i,j)/(1.d0 + gamma_prop*delta_mage))
+           do j=1,3
+              do a = 1, n_nodes
+                 deps(i,j) = deps(i,j) + 0.5d0 *(dNdx(a,j)*ddisp(i,a)+dNdx(a,i)*ddisp(j,a))
               end do
-          end do
-          temp2 = dsqrt(temp2)
-
-          temp3 = 0.d0
-          do i=1,3
-             do j=1,3
-              temp3 = temp3+1.5d0*(S_tr(i,j)-alpha_t(i,j)/(1.d0 + gamma_prop*delta_mage)) &
-                            *(alpha_t(i,j)*gamma_prop/(1.d0 + gamma_prop*delta_mage)**2.d0)
-             end do
-          end do
-
-          F_fun = Y0 +temp1*delta_mage-temp2
-          dFde = temp1 - c_prop*delta_mage*gamma_prop/(1.d0 + gamma_prop*delta_mage)**2.d0 &
-                 - temp3/temp2
-          delta_mage_new = delta_mage - F_fun/dFde
-          if (delta_mage_new .LT. 0.d0) then
-            delta_mage = delta_mage/10.d0
-          else
-            delta_mage = delta_mage_new
-          end if
-          error = abs(F_fun)
-          iter = iter + 1
-
-          if (iter .EQ. maxit) then
-            write(*,*) 'Warning in solving delta_mage: Max iterations exceeded.'
-            stop
-          end if
-
-      end do
-
-     ! Step 5. Update the deviatoric stress,current stress and pressure
-       temp5 = Y0 + (gamma_prop*Y0+c_prop)*delta_mage
-       ita = 1.5d0*E/(1.d0+xnu)*delta_mage/temp5
-       temp6 = 1.5d0*E/Y0/(1.d0*xnu)-ita*c_prop/Y0
-       lamda = 1.d0/(1.d0+delta_mage*temp6)
-       S_tau = lamda*(S_tr+ita*alpha_t)
-       sig_tau = S_tau - press_t*Iden + E/3.d0/(1.d0-2.d0*xnu)*tr_deps*Iden
-       press_tau = -third*(sig_tau(1,1)+sig_tau(2,2)+sig_tau(3,3))
-
-     ! Step 6. Update the nonlinear kinematic hardening relation: alpha_tau
-       temp4 = (1.d0+(gamma_prop+c_prop/Y0)*delta_mage)
-       alpha_tau=(alpha_t+delta_mage*c_prop/Y0*S_tau)/temp4
-     ! Return the material mechanical tangents Cijkl or Matrix D
-
-      ditade = 1.5d0*E/(1.d0+xnu)*(1.d0/temp5 - (temp5 - Y0)/temp5**2.d0)
-      dlamdade = - (lamda**2.d0) *(temp6-delta_mage*c_prop/Y0*ditade)
-      temp7 = dlamdade*ita+lamda*ditade
-      beta = 1.d0/(Y0+(1.5d0*E/(1.d0+xnu)+c_prop/(1.d0+gamma_prop*delta_mage))*delta_mage)
-
-      do i=1,3
-        do j=1,3
-          do k =1,3
-            do l= 1,3
-               Ctang(i,j,k,l) = lamda*E/(1.d0+xnu)*((Iden(i,k)*Iden(j,l)+Iden(j,k)*Iden(i,l))&
-               /2.d0- third*Iden(i,j)*Iden(k,l))+third*E/(1.d0-2.d0*xnu)*Iden(i,j)*Iden(k,l) &
-               + 1.5d0*beta*E/(1.d0+xnu)/dFde*(dlamdade*S_tr(k,l)*S_tr(i,j)-temp7&
-               *alpha_t(k,l)*alpha_t(i,j)/(1.d0+gamma_prop*delta_mage)+ &
-               temp7*S_tr(k,l)*alpha_t(i,j)-dlamdade*alpha_t(k,l)* &
-               S_tr(i,j)/(1.d0+gamma_prop*delta_mage))
-            end do
-          end do
-        end do
-      end do
-
-    ! Construct the D matrix using Cijkl above,not assuming C is symmetric here.
-      D = 0.d0
-      do i=1,3
-        do j=1,3
-           D(i,j) = Ctang(i,i,j,j)
-        end do
-      end do
-        do i =1,3
-           D(i,4) = Ctang(i,i,1,2)
-           D(4,i) = Ctang(1,2,i,i)
-        end do
-           D(4,4) = Ctang(1,2,1,2)
-        do i=1,3
-           D(i,5) = Ctang(i,i,1,3)
-           D(5,i) = Ctang(1,3,i,i)
-        end do
-           D(5,5) = Ctang(1,3,1,3)
-           D(4,5) = Ctang(1,2,1,3)
-           D(5,4) = Ctang(1,3,1,2)
-        do i=1,3
-           D(i,6) = Ctang(i,i,2,3)
-           D(6,i) = Ctang(2,3,i,i)
-        end do
-           D(6,6) = Ctang(2,3,2,3)
-           D(4,6) = Ctang(1,2,2,3)
-           D(6,4) = Ctang(2,3,1,2)
-           D(5,6) = Ctang(1,3,2,3)
-           D(6,5) = Ctang(2,3,1,3)
-      write(*,*) 'plastic step'
-           write(*,*) ''
-      !!!! examine yeild
-      Sbar_tau = 0.d0
-      do i=1,3
-        do j=1,3
-          Sbar_tau = Sbar_tau + 1.5d0*(S_tau(i,j)-alpha_tau(i,j))*(S_tau(i,j)-alpha_tau(i,j))
-        end do
-      end do
-      Sbar_tau = dsqrt(Sbar_tau)
-
-      examine = Sbar_tau - Y0
-           write(*,*) 'examine'
-           write(*,*)   examine
-           write(*,*)   ''
-    end if
-!    Update state variables
-     sdev = 0.d0
-     alpha = 0.d0
-     press = 0.d0
-!
-        do i=1,3
-          sdev(i) = S_tau(i,i)
-          alpha(i) = alpha_tau(i,i)
+           end do
         end do
 
-        sdev(4) = S_tau(1,2)
-        sdev(5) = S_tau(1,3)
-        sdev(6) = S_tau(2,3)
+       call nl_kinematic_material(element_properties,n_properties,deps,initial_state_variables,updated_state_variables,&
+                                 n_state_variables,jj,stress,D)
 
-        alpha(4) = alpha_tau(1,2)
-        alpha(5) = alpha_tau(1,3)
-        alpha(6) = alpha_tau(2,3)
-
-        press = press_tau
-
-        updated_state_variables(1+jj:6+jj) = sdev
-        updated_state_variables(7+jj) = press_tau
-        updated_state_variables(8+jj:13+jj) = alpha
-
-        jj = jj + 13
-
-         stress(1) = sig_tau(1,1)
-         stress(2) = sig_tau(2,2)
-         stress(3) = sig_tau(3,3)
-         stress(4) = sig_tau(1,2)
-         stress(5) = sig_tau(1,3)
-         stress(6) = sig_tau(2,3)
-         write(*,*) 's11'
-          write(*,*) stress(1)
-          write(*,*) ' '
-
-!
        if ( element_identifier == 3001 ) then
 
         element_residual(1:3*n_nodes) = element_residual(1:3*n_nodes) - matmul(transpose(B),stress)*w(kint)*determinant
@@ -504,8 +250,8 @@ subroutine fieldvars_3d_kinematic_plasticity(lmn, element_identifier, n_nodes, n
     real (prec)  ::  el_vol                            ! element volume
     real (prec)  ::  dxidx(3,3), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(3,length_coord_array/3)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
-    real (prec)  :: E, xnu, D44, D11, D12              ! Material properties
-    real (prec)  :: p, smises                          ! Pressure and Mises stress
+    real (prec)  ::  E, xnu, D44, D11, D12              ! Material properties
+    real (prec)  ::  p, smises                          ! Pressure and Mises stress
     !
     !     Subroutine to compute element contribution to project element integration point data to nodes
 
@@ -549,8 +295,9 @@ subroutine fieldvars_3d_kinematic_plasticity(lmn, element_identifier, n_nodes, n
          end do
        end do
     !     --  Loop over integration points
+    jj = 0 ! jj is used for tracking the state variables
     do kint = 1, n_points
-       jj = 0 ! jj is used for tracking the state variables
+
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
         dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
         call invert_small(dxdxi,dxidx,determinant)
@@ -632,20 +379,286 @@ subroutine fieldvars_3d_kinematic_plasticity(lmn, element_identifier, n_nodes, n
     return
 end subroutine fieldvars_3d_kinematic_plasticity
 
-!subroutine nl_kinematic_material(properties,n_props,dstrain,initial_state,updated_state,n_states,stress,D)
-!    use Types
-!    use ParamIO
-!    !  use Globals, only: TIME,DTIME  For a time dependent problem uncomment this line to access the time increment and total time
+subroutine nl_kinematic_material(element_properties,n_properties,deps,initial_state_variables,updated_state_variables,&
+                                 n_state_variables,jj,stress,D)
+    use Types
+    use ParamIO
+    !  use Globals, only: TIME,DTIME  For a time dependent problem uncomment this line to access the time increment and total time
+
+    implicit none
+
+    integer, intent( in ) :: n_properties                                                   ! # properties for the element
+    integer, intent( in ) :: n_state_variables                                              ! # state variables for the element
+    integer, intent( inout ) :: jj                                                          ! track of state variables
+    real( prec ), intent( in )    :: element_properties(n_properties)                       ! Element or material properties, stored in order listed in input file
+    real( prec ), intent( in )    :: initial_state_variables(n_state_variables)             ! Element state variables.  Defined in this routine
+    real( prec ), intent( inout ) :: updated_state_variables(n_state_variables)             ! State variables at end of time step
+
+    integer      :: i,j,k,l,a,iter,maxit
+
+    real (prec)  ::  stress(6)                         ! Stress vector contains [s11, s22, s33, s12, s13, s23]
+    real (prec)  ::  D(6,6)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
+    real (prec)  ::  E, xnu, D44, D11, D12,Y0,c_prop,gamma_prop             ! Material properties
+    ! _tr means trial step, _t means last step, _tau means current step
+    real (prec)  ::  Iden(3,3),S_tr(3,3),alpha_t(3,3),S_t(3,3),press_t,sig_t(3,3),Sbar_tr
+    real (prec)  ::  sdev0(6),sdev(6),press0,press,alpha0(6),alpha(6)
+    real (prec)  ::  S_tau(3,3),press_tau,alpha_tau(3,3),sig_tau(3,3)
+    real (prec)  ::  deps(3,3),deps0(3,3),tr_deps
+    real (prec)  ::  F_tr,F_fun,dFde,error,delta_mage,tol,delta_mage_new,ita,lamda,ditade,dlamdade,beta
+    real (prec)  ::  temp1,temp2,temp3,temp4,temp5,temp6,temp7,Ctang(3,3,3,3)
+    real (prec)  ::  third,examine,Sbar_tau
+
+    !     Subroutine to compute stress state for kinematic material
+    !     El props are:
+
+    !     element_properties(1)         Young's modulus
+    !     element_properties(2)         Poisson's ratio
+    !     element_properties(3)         Initial yield stress
+    !     element_properties(4)         Hardening rate c
+    !     element_properties(5)         Nonlinear parameter gamma
+
+    ! Utilities
+      third = 1.d0/3.d0
+      Iden = 0.d0
+        do i=1,3
+            Iden(i,i)=1.0d0
+        end do
+    ! Pass material properties in
+
+       E          = element_properties(1)
+       xnu        = element_properties(2)
+       Y0         = element_properties(3)
+       c_prop     = element_properties(4)
+       gamma_prop = element_properties(5)
+    !
+
+    !      obtian the state variables at step N
+        sdev0  = initial_state_variables(1+jj:6+jj)
+        press0 = initial_state_variables(7+jj)
+        alpha0 = initial_state_variables(8+jj:13+jj)
+     !      Construct them into matrix form for further calculation
+           press_t = press0
+
+        do i=1,3
+           S_t(i,i)= sdev0(i)
+           alpha_t(i,i) = alpha0(i)
+        end do
+           S_t(1,2) = sdev0(4)
+           S_t(2,1) = S_t(1,2)
+           S_t(1,3) = sdev0(5)
+           S_t(3,1) = S_t(1,3)
+           S_t(2,3) = sdev0(6)
+           S_t(3,2) = S_t(2,3)
+
+          alpha_t(1,2) = alpha0(4)
+          alpha_t(2,1) = alpha_t(1,2)
+          alpha_t(1,3) = alpha0(5)
+          alpha_t(3,1) = alpha_t(1,3)
+          alpha_t(2,3) = alpha0(6)
+          alpha_t(3,2) = alpha_t(2,3)
+
+
+  !**********************************************************************************
+    !  Meterial properties
+  !**********************************************************************************
+
+
+
+   ! Step 1. Compute the deviatoric strain increment
+      tr_deps= deps(1,1)+deps(2,2)+deps(3,3)
+      deps0 = deps - third*tr_deps*Iden
+   ! Step 2. Calculate the 'elastic predictor' S_tr and effectice stress Sbar_tr at the end of the increment
+      S_tr = S_t + E/(1+xnu)*deps0
+      Sbar_tr = 0.d0
+      do i=1,3
+        do j=1,3
+          Sbar_tr = Sbar_tr + 1.5d0*(S_tr(i,j)-alpha_t(i,j))*(S_tr(i,j)-alpha_t(i,j))
+        end do
+      end do
+      Sbar_tr = dsqrt(Sbar_tr)
+
+   ! Step 3. Check whether this is an elastic or a plastic step by yield criterion
+      F_tr = Sbar_tr - Y0
+    if ( F_tr .LE. 0.d0) then! elastic step
+
+      ! return elastic tangents and trial stress as its true stress at the end of the step.
+      ! Update the internal variables
+       alpha_tau = alpha_t
+       S_tau = S_tr
+       press_tau = press_t - tr_deps* E/(1.d0-2.d0*xnu)*third
+
+      ! Update the material mechanical tangent modulus
+       D = 0.d0
+       d44 = 0.5D0*E/(1+xnu)
+       d11 = (1.D0-xnu)*E/( (1+xnu)*(1-2.D0*xnu) )
+       d12 = xnu*E/( (1+xnu)*(1-2.D0*xnu) )
+       D(1:3,1:3) = d12
+       D(1,1) = d11
+       D(2,2) = d11
+       D(3,3) = d11
+       D(4,4) = d44
+       D(5,5) = d44
+       D(6,6) = d44
+     ! Update stress
+       sig_tau = S_tau - press_tau*Iden
+
+    else ! plastic step
+
+     ! Step.4 Solve the plastic strain increment
+      delta_mage = 1.0d-15
+      error = Y0
+      tol = 1.d-8 * Y0
+      iter = 1
+      maxit = 50
+     do while(error .GT. tol)
+
+          temp1 = (1.5d0*E/(1+xnu)+c_prop/(1.d0 + gamma_prop*delta_mage))
+
+          temp2 = 0.d0
+          do i=1,3
+             do j=1,3
+              temp2 = temp2+1.5d0* (S_tr(i,j)-alpha_t(i,j)/(1.d0 + gamma_prop*delta_mage)) &
+                            *(S_tr(i,j)-alpha_t(i,j)/(1.d0 + gamma_prop*delta_mage))
+              end do
+          end do
+          temp2 = dsqrt(temp2)
+
+          temp3 = 0.d0
+          do i=1,3
+             do j=1,3
+              temp3 = temp3+1.5d0*(S_tr(i,j)-alpha_t(i,j)/(1.d0 + gamma_prop*delta_mage)) &
+                            *(alpha_t(i,j)*gamma_prop/(1.d0 + gamma_prop*delta_mage)**2.d0)
+             end do
+          end do
+
+          F_fun = Y0 +temp1*delta_mage-temp2
+          dFde = temp1 - c_prop*delta_mage*gamma_prop/(1.d0 + gamma_prop*delta_mage)**2.d0 &
+                 + temp3/temp2
+          delta_mage_new = delta_mage - F_fun/dFde
+          if (delta_mage_new .LT. 0.d0) then
+            delta_mage = delta_mage/10.d0
+          else
+            delta_mage = delta_mage_new
+          end if
+          error = abs(F_fun)
+          iter = iter + 1
+
+          if (iter .EQ. maxit) then
+            write(*,*) 'Warning in solving delta_mage: Max iterations exceeded.'
+            stop
+          end if
+
+      end do
+
+     ! Step 5. Update the deviatoric stress,current stress and pressure
+       temp5 = Y0 + (gamma_prop*Y0+c_prop)*delta_mage
+       ita = 1.5d0*E/(1.d0+xnu)*delta_mage/temp5
+       temp6 = 1.5d0*E/Y0/(1.d0+xnu)-ita*c_prop/Y0
+       lamda = 1.d0/(1.d0+delta_mage*temp6)
+       S_tau = lamda*(S_tr+ita*alpha_t)
+       sig_tau = S_tau - press_t*Iden + E/3.d0/(1.d0-2.d0*xnu)*tr_deps*Iden
+       press_tau = -third*(sig_tau(1,1)+sig_tau(2,2)+sig_tau(3,3))
+
+     ! Step 6. Update the nonlinear kinematic hardening relation: alpha_tau
+       temp4 = (1.d0+(gamma_prop+c_prop/Y0)*delta_mage)
+       alpha_tau=(alpha_t+delta_mage*c_prop/Y0*S_tau)/temp4
+     ! Return the material mechanical tangents Cijkl or Matrix D
+
+      ditade = 1.5d0*E/(1.d0+xnu)*(1.d0/temp5 - (temp5 - Y0)/temp5**2.d0)
+      dlamdade = - (lamda**2.d0) *(temp6-delta_mage*c_prop/Y0*ditade)
+      temp7 = dlamdade*ita+lamda*ditade
+      beta = 1.d0/(Y0+(1.5d0*E/(1.d0+xnu)+c_prop/(1.d0+gamma_prop*delta_mage))*delta_mage)
+
+      do i=1,3
+        do j=1,3
+          do k =1,3
+            do l= 1,3
+               Ctang(i,j,k,l) = lamda*E/(1.d0+xnu)*((Iden(i,k)*Iden(j,l)+Iden(j,k)*Iden(i,l))&
+               /2.d0- third*Iden(i,j)*Iden(k,l))+third*E/(1.d0-2.d0*xnu)*Iden(i,j)*Iden(k,l) &
+               + 1.5d0*beta*E/(1.d0+xnu)/dFde*(dlamdade*S_tr(k,l)*S_tr(i,j)-temp7&
+               *alpha_t(k,l)*alpha_t(i,j)/(1.d0+gamma_prop*delta_mage)+ &
+               temp7*S_tr(k,l)*alpha_t(i,j)-dlamdade*alpha_t(k,l)* &
+               S_tr(i,j)/(1.d0+gamma_prop*delta_mage))
+            end do
+          end do
+        end do
+      end do
+
+    ! Construct the D matrix using Cijkl above,not assuming C is symmetric here.
+      D = 0.d0
+      do i=1,3
+        do j=1,3
+           D(i,j) = Ctang(i,i,j,j)
+        end do
+      end do
+        do i =1,3
+           D(i,4) = Ctang(i,i,1,2)
+           D(4,i) = Ctang(1,2,i,i)
+        end do
+           D(4,4) = Ctang(1,2,1,2)
+        do i=1,3
+           D(i,5) = Ctang(i,i,1,3)
+           D(5,i) = Ctang(1,3,i,i)
+        end do
+           D(5,5) = Ctang(1,3,1,3)
+           D(4,5) = Ctang(1,2,1,3)
+           D(5,4) = Ctang(1,3,1,2)
+        do i=1,3
+           D(i,6) = Ctang(i,i,2,3)
+           D(6,i) = Ctang(2,3,i,i)
+        end do
+           D(6,6) = Ctang(2,3,2,3)
+           D(4,6) = Ctang(1,2,2,3)
+           D(6,4) = Ctang(2,3,1,2)
+           D(5,6) = Ctang(1,3,2,3)
+           D(6,5) = Ctang(2,3,1,3)
+      !!!! examine yeild
+!      Sbar_tau = 0.d0
+!      do i=1,3
+!        do j=1,3
+!          Sbar_tau = Sbar_tau + 1.5d0*(S_tau(i,j)-alpha_tau(i,j))*(S_tau(i,j)-alpha_tau(i,j))
+!        end do
+!      end do
+!      Sbar_tau = dsqrt(Sbar_tau)
 !
-!    implicit none
+!      examine = Sbar_tau - Y0
+!           write(*,*) 'examine'
+!           write(*,*)   examine
+!           write(*,*)   ''
 !
-!    integer, intent( in ) :: n_props
-!    integer, intent( in ) :: n_states
+    end if
+
+!    Update state variables
+     sdev = 0.d0
+     alpha = 0.d0
+     press = 0.d0
 !
-!    real (prec), intent( in )         :: properties(n_props)                                                   ! Element number
-!
-!
-!    real (prec), intent( out ) :: stress(6)
-!
-!
-!end subroutine nl_kinematic_material
+        do i=1,3
+          sdev(i) = S_tau(i,i)
+          alpha(i) = alpha_tau(i,i)
+        end do
+
+        sdev(4) = S_tau(1,2)
+        sdev(5) = S_tau(1,3)
+        sdev(6) = S_tau(2,3)
+
+        alpha(4) = alpha_tau(1,2)
+        alpha(5) = alpha_tau(1,3)
+        alpha(6) = alpha_tau(2,3)
+
+        press = press_tau
+
+        updated_state_variables(1+jj:6+jj) = sdev
+        updated_state_variables(7+jj) = press_tau
+        updated_state_variables(8+jj:13+jj) = alpha
+
+        jj = jj + 13
+
+         stress(1) = sig_tau(1,1)
+         stress(2) = sig_tau(2,2)
+         stress(3) = sig_tau(3,3)
+         stress(4) = sig_tau(1,2)
+         stress(5) = sig_tau(1,3)
+         stress(6) = sig_tau(2,3)
+
+end subroutine nl_kinematic_material
