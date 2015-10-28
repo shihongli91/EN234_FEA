@@ -79,6 +79,7 @@ subroutine compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_average
     use Element_Utilities, only : N => shape_functions_3D
     use Element_Utilities, only:  dNdxi => shape_function_derivatives_3D
     use Element_Utilities, only:  dNdx => shape_function_spatial_derivatives_3D
+    use Element_Utilities, only : dNbardx => vol_avg_shape_function_derivatives_3D
     use Element_Utilities, only : xi => integrationpoints_3D, w => integrationweights_3D
     use Element_Utilities, only : dxdxi => jacobian_3D
     use Element_Utilities, only : initialize_integration_points
@@ -117,12 +118,14 @@ subroutine compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_average
     integer      :: n_coords, n_dof
     integer      :: iof
     integer      :: status
-
+    integer      :: m_count, n_count
     real (prec)  ::  el_vol
     real (prec), allocatable  ::  B(:,:)               ! strain = B*(dof_total+dof_increment)
     real (prec)  ::  strain(6)                         ! Strain vector contains [e11, e22, e33, 2e12, 2e13, 2e23]
     real (prec)  ::  dstrain(6)                        ! Strain increment vector
     real (prec)  ::  dxidx(3,3), determinant           ! Jacobian inverse and determinant
+    real (prec)  ::  Bbar(6,length_dof_array)          ! strain = Bbar*(dof_total+dof_increment), B-bar method
+    real (prec)  ::  temp(6,length_dof_array)          ! temp matrix when constructing B-bar matrix
     !
     !  Allocate memory to store element data.
     !  The variables specifying the size of the arrays are stored in the module user_subroutine_storage
@@ -173,6 +176,36 @@ subroutine compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_average
        write(IOW,*) ' but the array storing averaged state variables has length ',size(vol_averaged_state_vars)
        stop
     endif
+
+
+
+    ! B-bar method
+    el_vol = 0.d0
+    dNbardx = 0.d0
+    !     -- Loop over the integration points for B bar method
+    do kint = 1, n_points
+       call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
+        dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
+        call invert_small(dxdxi,dxidx,determinant)
+        dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+
+    !
+        do m_count = 1,n_nodes
+           do n_count = 1,3
+              dNbardx(m_count,n_count) = dNbardx(m_count,n_count) + &
+                                         dNdx(m_count,n_count)*w(kint)*determinant
+           end do
+        end do
+    !   Get the average element volume
+        el_vol = el_vol + w(kint)*determinant
+    end do
+
+    !   Get the final form of vol_avg_shape function derivatives
+       do m_count = 1,n_nodes
+         do n_count = 1,3
+             dNbardx(m_count,n_count) = dNbardx(m_count,n_count)/el_vol
+         end do
+       end do
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
@@ -181,7 +214,11 @@ subroutine compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_average
 
         iof = n_state_vars_per_intpt*(kint-1)+1
         dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+
         B = 0.d0
+        temp = 0.d0
+        Bbar = 0.d0
+
         B(1,1:3*n_nodes-2:3) = dNdx(1:n_nodes,1)
         B(2,2:3*n_nodes-1:3) = dNdx(1:n_nodes,2)
         B(3,3:3*n_nodes:3)   = dNdx(1:n_nodes,3)
@@ -192,20 +229,26 @@ subroutine compute_element_volume_average_3D(lmn,vol_averaged_strain,vol_average
         B(6,2:3*n_nodes-1:3) = dNdx(1:n_nodes,3)
         B(6,3:3*n_nodes:3)   = dNdx(1:n_nodes,2)
 
+        do m_count = 1,n_nodes
+        temp(1:3:1,3*m_count-2) = dNbardx(m_count,1) - dNdx(m_count,1)
+        temp(1:3:1,3*m_count-1) = dNbardx(m_count,2) - dNdx(m_count,2)
+        temp(1:3:1,3*m_count) = dNbardx(m_count,3) - dNdx(m_count,3)
+        end do
+
+        Bbar = B + 1.d0/3.d0 *temp
+        if ( element_identifier == 3001 ) then
         strain = matmul(B(1:6,1:3*n_nodes),dof_total(1:3*n_nodes))
         dstrain = matmul(B(1:6,1:3*n_nodes),dof_increment(1:3*n_nodes))
-
+        else if (element_identifier == 4001) then
+        strain = matmul(Bbar(1:6,1:3*n_nodes),dof_total(1:3*n_nodes))
+        dstrain = matmul(Bbar(1:6,1:3*n_nodes),dof_increment(1:3*n_nodes))
+        end if
         vol_averaged_strain(1:6) = vol_averaged_strain(1:6) + (strain(1:6)+dstrain(1:6))*w(kint)*determinant
-!         write(*,*) 'updated_state_variables'
-!         write(*,*) updated_state_variables(1)-updated_state_variables(7)
-!         write(*,*) ' '
 
         if (n_state_vars_per_intpt>0) then
            vol_averaged_state_vars(1:n_state_vars_per_intpt) = vol_averaged_state_vars(1:n_state_vars_per_intpt) &
                               + updated_state_variables(iof:iof+n_state_vars_per_intpt-1)*w(kint)*determinant
         endif
-
-        el_vol = el_vol + w(kint)*determinant
 
     end do
 
