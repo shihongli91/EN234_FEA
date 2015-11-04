@@ -7391,7 +7391,7 @@ END MESH
 
 
          PRINT STATE, Output_files\contourplots_holeplate_3d_Bbar.dat
-%            DEGREES OF FREEDOM
+           DEGREES OF FREEDOM
             FIELD VARIABLES, S11,S22,S33,S12,S13,S23,E11,E22,E33,E12,E23,E13,SMISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0

@@ -4131,9 +4131,9 @@ END NODES
 %     The parameters are no. nodes on the element, total no. state variables, integer identifier  
       ELEMENTS
 
-       PARAMETERS, 8, 0, 1002
+       PARAMETERS, 8, 0, 4002
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
-%       For the example provided, the params are Youngs Modulus, Poissons ratio and thermal expansion coeft
+%       For the example provided, the params are G, K
         PROPERTIES
          10.d0, 1000.d0
         END PROPERTIES
@@ -7318,11 +7318,11 @@ END MESH
 
 %  Print the initial mesh to a file named initial_mesh.dat
 
-   PRINT INITIAL MESH, initial_mesh.dat
+   PRINT INITIAL MESH, hyper_hole_initial_mesh.dat
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-%       CHECK STIFFNESS, 1001
+%       CHECK STIFFNESS, 4001
 
 %    STOP
 
@@ -7341,7 +7341,7 @@ END MESH
           INITIAL TIME STEP, 0.25d0
           MAX TIME STEP, 1.d0
           MIN TIME STEP, 0.001d0
-          MAX NUMBER OF STEPS, 12
+          MAX NUMBER OF STEPS, 20
           STOP TIME, 10.d0
           STATE PRINT STEP INTERVAL, 1
           USER PRINT STEP INTERVAL, 1
@@ -7364,9 +7364,9 @@ END MESH
 
 
 
-         PRINT STATE, Output_files\contourplots.dat
-%            DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12,S13,S23
+         PRINT STATE, Output_files\Holeplate_hyperelas_contourplots.dat
+            DEGREES OF FREEDOM
+            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,MISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE

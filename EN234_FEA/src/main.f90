@@ -86,10 +86,10 @@ program en234fea
 !    open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)
 !!
 ! Homework 6: small-strain Armstrong-Frederick kinematic hardening model
-  infil = './input_files/cyclic_plastic_3d.in'
-  open (unit = IOR, file = infil, status = 'old', ERR=500)
-  outfil = './Output_files/cyclic_plastic_3d.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!  infil = './input_files/cyclic_plastic_3d.in'
+!  open (unit = IOR, file = infil, status = 'old', ERR=500)
+!  outfil = './Output_files/cyclic_plastic_3d.out'
+!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 ! Homework 7, stretch a hyperelastic bar, check stiffness.
 !  infil = './input_files/Hyperelastic_bar_stretch.in'
@@ -108,8 +108,16 @@ program en234fea
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
 !  outfil = './Output_files/Holeplate_hyperelastic.out'
 !  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
-
-
+      infil(1) = './input_files/Hyperelastic_bar_stretch.in'
+   outfil(1) = './Output_files/hyperelastic_bar_stretch.out'
+      infil(2) = './input_files/Hyperelastic_stretch_rotate.in'
+   outfil(2) = './Output_files/hyperelastic_stretch_rotate.out'
+      infil(3) = './input_files/Holeplate_hyperelastic.in'
+   outfil(3) = './Output_files/Holeplate_hyperelastic.out'
+  do num_kk = 1,3
+    write(*,*) 'LOOP'
+    open (unit = IOR, file = infil(num_kk), status = 'old', ERR=500)
+    open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)
 !!  Homework 8, solve the 2D Cahn-Hilliard equation
 !  infil = './input_files/cahn_hilliard_2d_fine.in'
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
@@ -138,7 +146,7 @@ program en234fea
   endif
 
 
-! end do
+ end do
    write(6,*) ' Program completed successfully '
    stop
    500 write(6,*) ' Error opening input or output file '

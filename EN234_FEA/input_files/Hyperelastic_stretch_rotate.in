@@ -38,9 +38,9 @@
 %     The parameters are no. nodes on the element, total no. state variables, integer identifier
 
       ELEMENTS
-        PARAMETERS, 8, 0, 1002
+        PARAMETERS, 8, 0, 4002
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
-%       For the example provided, the params are Youngs Modulus, Poissons ratio
+%       For the example provided, the params are G, K
         PROPERTIES
          10.d0, 1000.d0
         END PROPERTIES
@@ -121,14 +121,14 @@
 
 %  Print the initial mesh to a file named initial_mesh.dat
 
-   PRINT INITIAL MESH, initial_mesh.dat
+   PRINT INITIAL MESH, hyperelas_rotat_initial_mesh.dat
 
 %   TIME, VALUE, 0.d0        % Use this to specify the initial time
 %   TIME, INCREMENT, 0.01d0  % Use this to specify a time increment (often needed for check stiffness)
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-       CHECK STIFFNESS, 1002
+       CHECK STIFFNESS, 4002
 
 %     STOP
 
@@ -167,9 +167,9 @@
 %         The projected states are controlled by the user - see subroutine elstat in file usrelem.f90
 %         Also (for this example file) subroutine state_linelast_3dbasic in file el_linelast_3Dbasic.f90
 %         In this example the states are the stresses sxx,syy,szz,sxy,sxz,syz
-         PRINT STATE, Output_files\contourplots.dat
-%            DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12,S13,S23
+         PRINT STATE, Output_files\hyperelas_rotate_contourplots.dat
+            DEGREES OF FREEDOM
+            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,MISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE
