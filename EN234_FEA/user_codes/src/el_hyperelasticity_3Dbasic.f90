@@ -300,7 +300,7 @@ subroutine el_hyperslasticity_3dbasic(lmn, element_identifier, n_nodes, node_pro
       Gmat(2,8) = 2.d0*B_CG(2,3)
       Gmat(3,3) = 2.d0*B_CG(3,3)
       Gmat(3,7) = 2.d0*B_CG(1,3)
-      Gmat(3,9) = 2.d0*B_CG(1,3)
+      Gmat(3,9) = 2.d0*B_CG(2,3)
       Gmat(4,1) = 2.d0*B_CG(1,2)
       Gmat(4,2) = 2.d0*B_CG(1,2)
       Gmat(4,4) = 2.d0*B_CG(2,2)

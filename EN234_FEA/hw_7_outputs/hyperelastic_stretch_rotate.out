@@ -736,7 +736,7 @@
   Correction norm               0.610489D-05
   Generalized Force norm        0.113801D+02
   Out of balance force norm     0.405099D-07
-  Ratio                         0.355972D-08
+  Ratio                         0.355971D-08
   Tolerance                     0.100000D-04
 
 
@@ -775,145 +775,225 @@
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.2595E+04
+      Max diagonal in reduced matrix:    0.2603E+04
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.2595E+04
+      Ratio:                             0.2603E+04
       Maximum no. diagonal digits lost:   1
 
 
   Newton Raphson iteration       2
-  Correction norm               0.387104D+01
-  Generalized Force norm        0.419290D+03
-  Out of balance force norm     0.340884D+03
-  Ratio                         0.805566D+00
+  Correction norm               0.386642D+01
+  Generalized Force norm        0.426490D+03
+  Out of balance force norm     0.346869D+03
+  Ratio                         0.806005D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.4180E+04
-      Min diagonal in reduced matrix:    0.7153E+00
-      Ratio:                             0.5844E+04
+      Max diagonal in reduced matrix:    0.7019E+04
+      Min diagonal in reduced matrix:    0.4113E+00
+      Ratio:                             0.1707E+05
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       3
-  Correction norm               0.237721D+01
-  Generalized Force norm        0.186256D+02
-  Out of balance force norm     0.148845D+02
-  Ratio                         0.708691D+00
+  Correction norm               0.238399D+01
+  Generalized Force norm        0.252128D+02
+  Out of balance force norm     0.163055D+02
+  Ratio                         0.590847D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.1096E+03
-      Min diagonal in reduced matrix:    0.3370E+00
-      Ratio:                             0.3253E+03
-      Maximum no. diagonal digits lost:   3
+      Max diagonal in reduced matrix:    0.1110E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.1110E+03
+      Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       4
-  Correction norm               0.516332D+00
-  Generalized Force norm        0.144868D+03
-  Out of balance force norm     0.118292D+03
-  Ratio                         0.813646D+00
+  Correction norm               0.117185D+01
+  Generalized Force norm        0.717133D+03
+  Out of balance force norm     0.580378D+03
+  Ratio                         0.807982D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.3283E+03
+      Max diagonal in reduced matrix:    0.5744E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.3283E+03
+      Ratio:                             0.5744E+03
       Maximum no. diagonal digits lost:   1
 
 
   Newton Raphson iteration       5
-  Correction norm               0.672306D-01
-  Generalized Force norm        0.159331D+02
-  Out of balance force norm     0.777458D+01
-  Ratio                         0.485901D+00
+  Correction norm               0.682757D+00
+  Generalized Force norm        0.762818D+03
+  Out of balance force norm     0.640428D+03
+  Ratio                         0.838805D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.1926E+03
+      Max diagonal in reduced matrix:    0.5403E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.1926E+03
+      Ratio:                             0.5403E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       6
-  Correction norm               0.215978D+00
-  Generalized Force norm        0.352184D+02
-  Out of balance force norm     0.284449D+02
-  Ratio                         0.802748D+00
+  Correction norm               0.203496D+00
+  Generalized Force norm        0.103894D+03
+  Out of balance force norm     0.833674D+02
+  Ratio                         0.800859D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.6182E+03
+      Max diagonal in reduced matrix:    0.4399E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.6182E+03
+      Ratio:                             0.4399E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       7
-  Correction norm               0.332155D-01
-  Generalized Force norm        0.113566D+02
-  Out of balance force norm     0.633998D+00
-  Ratio                         0.556636D-01
+  Correction norm               0.380766D+00
+  Generalized Force norm        0.141741D+03
+  Out of balance force norm     0.126441D+03
+  Ratio                         0.889666D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.2352E+03
+      Max diagonal in reduced matrix:    0.5668E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.2352E+03
+      Ratio:                             0.5668E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       8
-  Correction norm               0.386158D-01
-  Generalized Force norm        0.112645D+02
-  Out of balance force norm     0.929804D+00
-  Ratio                         0.822609D-01
+  Correction norm               0.272662D+00
+  Generalized Force norm        0.618797D+02
+  Out of balance force norm     0.548452D+02
+  Ratio                         0.882432D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.2253E+03
+      Max diagonal in reduced matrix:    0.4660E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.2253E+03
+      Ratio:                             0.4660E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       9
-  Correction norm               0.628713D-03
-  Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.388783D-03
-  Ratio                         0.341614D-04
+  Correction norm               0.308355D+00
+  Generalized Force norm        0.649637D+02
+  Out of balance force norm     0.550167D+02
+  Ratio                         0.842882D+00
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.2253E+03
+      Max diagonal in reduced matrix:    0.3531E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.2253E+03
+      Ratio:                             0.3531E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration      10
-  Correction norm               0.169509D-04
+  Correction norm               0.144288D+00
+  Generalized Force norm        0.204383D+02
+  Out of balance force norm     0.157934D+02
+  Ratio                         0.767320D+00
+  Tolerance                     0.100000D-04
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.3101E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.3101E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration      11
+  Correction norm               0.190427D+00
+  Generalized Force norm        0.285064D+02
+  Out of balance force norm     0.226979D+02
+  Ratio                         0.790957D+00
+  Tolerance                     0.100000D-04
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2523E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.2523E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration      12
+  Correction norm               0.575221D-01
+  Generalized Force norm        0.113141D+02
+  Out of balance force norm     0.218287D+01
+  Ratio                         0.191958D+00
+  Tolerance                     0.100000D-04
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2398E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.2398E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration      13
+  Correction norm               0.526475D-01
+  Generalized Force norm        0.112611D+02
+  Out of balance force norm     0.178720D+01
+  Ratio                         0.157968D+00
+  Tolerance                     0.100000D-04
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2262E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.2262E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration      14
+  Correction norm               0.437571D-02
+  Generalized Force norm        0.113782D+02
+  Out of balance force norm     0.115041D-01
+  Ratio                         0.101068D-02
+  Tolerance                     0.100000D-04
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2254E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.2254E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration      15
+  Correction norm               0.336532D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.179143D-06
-  Ratio                         0.157418D-07
+  Out of balance force norm     0.729570D-04
+  Ratio                         0.641075D-05
   Tolerance                     0.100000D-04
 
 
@@ -945,8 +1025,8 @@
   Newton Raphson iteration       1
   Correction norm               0.216349D+00
   Generalized Force norm        0.133301D+02
-  Out of balance force norm     0.441285D+01
-  Ratio                         0.325758D+00
+  Out of balance force norm     0.441284D+01
+  Ratio                         0.325757D+00
   Tolerance                     0.100000D-04
 
 
@@ -959,10 +1039,10 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477864D-01
-  Generalized Force norm        0.112988D+02
-  Out of balance force norm     0.551153D+00
-  Ratio                         0.485742D-01
+  Correction norm               0.477823D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568057D+00
+  Ratio                         0.500725D-01
   Tolerance                     0.100000D-04
 
 
@@ -975,10 +1055,10 @@
 
 
   Newton Raphson iteration       3
-  Correction norm               0.559513D-02
-  Generalized Force norm        0.113766D+02
-  Out of balance force norm     0.192043D-01
-  Ratio                         0.168723D-02
+  Correction norm               0.558488D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200251D-01
+  Ratio                         0.175936D-02
   Tolerance                     0.100000D-04
 
 
@@ -991,10 +1071,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.134346D-03
+  Correction norm               0.137994D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.110441D-04
-  Ratio                         0.970468D-06
+  Out of balance force norm     0.121536D-04
+  Ratio                         0.106796D-05
   Tolerance                     0.100000D-04
 
 
@@ -1026,7 +1106,7 @@
   Newton Raphson iteration       1
   Correction norm               0.216349D+00
   Generalized Force norm        0.133301D+02
-  Out of balance force norm     0.441285D+01
+  Out of balance force norm     0.441286D+01
   Ratio                         0.325758D+00
   Tolerance                     0.100000D-04
 
@@ -1040,10 +1120,10 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477863D-01
-  Generalized Force norm        0.112989D+02
-  Out of balance force norm     0.550622D+00
-  Ratio                         0.485271D-01
+  Correction norm               0.477826D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568070D+00
+  Ratio                         0.500737D-01
   Tolerance                     0.100000D-04
 
 
@@ -1056,10 +1136,10 @@
 
 
   Newton Raphson iteration       3
-  Correction norm               0.559546D-02
-  Generalized Force norm        0.113766D+02
-  Out of balance force norm     0.192067D-01
-  Ratio                         0.168744D-02
+  Correction norm               0.558496D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200256D-01
+  Ratio                         0.175941D-02
   Tolerance                     0.100000D-04
 
 
@@ -1072,10 +1152,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.134223D-03
+  Correction norm               0.137999D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.110237D-04
-  Ratio                         0.968673D-06
+  Out of balance force norm     0.121545D-04
+  Ratio                         0.106804D-05
   Tolerance                     0.100000D-04
 
 
@@ -1121,10 +1201,10 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477851D-01
-  Generalized Force norm        0.112982D+02
-  Out of balance force norm     0.556459D+00
-  Ratio                         0.490445D-01
+  Correction norm               0.477825D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
@@ -1137,10 +1217,10 @@
 
 
   Newton Raphson iteration       3
-  Correction norm               0.559199D-02
-  Generalized Force norm        0.113765D+02
-  Out of balance force norm     0.194913D-01
-  Ratio                         0.171246D-02
+  Correction norm               0.558495D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200255D-01
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1153,10 +1233,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.135486D-03
+  Correction norm               0.137998D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.113991D-04
-  Ratio                         0.100166D-05
+  Out of balance force norm     0.121543D-04
+  Ratio                         0.106802D-05
   Tolerance                     0.100000D-04
 
 
@@ -1204,8 +1284,8 @@
   Newton Raphson iteration       2
   Correction norm               0.477825D-01
   Generalized Force norm        0.112969D+02
-  Out of balance force norm     0.568067D+00
-  Ratio                         0.500734D-01
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
@@ -1221,7 +1301,7 @@
   Correction norm               0.558495D-02
   Generalized Force norm        0.113764D+02
   Out of balance force norm     0.200255D-01
-  Ratio                         0.175941D-02
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1283,10 +1363,10 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477788D-01
-  Generalized Force norm        0.112951D+02
-  Out of balance force norm     0.584309D+00
-  Ratio                         0.515134D-01
+  Correction norm               0.477825D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
@@ -1299,10 +1379,10 @@
 
 
   Newton Raphson iteration       3
-  Correction norm               0.557508D-02
-  Generalized Force norm        0.113763D+02
-  Out of balance force norm     0.207507D-01
-  Ratio                         0.182314D-02
+  Correction norm               0.558495D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200255D-01
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1315,10 +1395,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.141503D-03
+  Correction norm               0.137998D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.132543D-04
-  Ratio                         0.116467D-05
+  Out of balance force norm     0.121543D-04
+  Ratio                         0.106802D-05
   Tolerance                     0.100000D-04
 
 
@@ -1364,10 +1444,10 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477744D-01
-  Generalized Force norm        0.112930D+02
-  Out of balance force norm     0.603591D+00
-  Ratio                         0.532232D-01
+  Correction norm               0.477825D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
@@ -1380,10 +1460,10 @@
 
 
   Newton Raphson iteration       3
-  Correction norm               0.556336D-02
-  Generalized Force norm        0.113761D+02
-  Out of balance force norm     0.215891D-01
-  Ratio                         0.189683D-02
+  Correction norm               0.558495D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200255D-01
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1396,10 +1476,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.145649D-03
+  Correction norm               0.137998D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.146320D-04
-  Ratio                         0.128574D-05
+  Out of balance force norm     0.121543D-04
+  Ratio                         0.106802D-05
   Tolerance                     0.100000D-04
 
 
@@ -1445,26 +1525,26 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477698D-01
-  Generalized Force norm        0.112908D+02
-  Out of balance force norm     0.624020D+00
-  Ratio                         0.550352D-01
+  Correction norm               0.477825D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.2355E+03
+      Max diagonal in reduced matrix:    0.2356E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.2355E+03
+      Ratio:                             0.2356E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       3
-  Correction norm               0.555098D-02
-  Generalized Force norm        0.113760D+02
-  Out of balance force norm     0.224546D-01
-  Ratio                         0.197290D-02
+  Correction norm               0.558495D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200255D-01
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1477,10 +1557,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.150022D-03
+  Correction norm               0.137998D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.161803D-04
-  Ratio                         0.142179D-05
+  Out of balance force norm     0.121543D-04
+  Ratio                         0.106802D-05
   Tolerance                     0.100000D-04
 
 
@@ -1526,26 +1606,26 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477653D-01
-  Generalized Force norm        0.112888D+02
-  Out of balance force norm     0.643594D+00
-  Ratio                         0.567717D-01
+  Correction norm               0.477825D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.2508E+03
+      Max diagonal in reduced matrix:    0.2509E+03
       Min diagonal in reduced matrix:    0.1000E+01
-      Ratio:                             0.2508E+03
+      Ratio:                             0.2509E+03
       Maximum no. diagonal digits lost:   2
 
 
   Newton Raphson iteration       3
-  Correction norm               0.553913D-02
-  Generalized Force norm        0.113758D+02
-  Out of balance force norm     0.232625D-01
-  Ratio                         0.204391D-02
+  Correction norm               0.558495D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200255D-01
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1558,10 +1638,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.154193D-03
+  Correction norm               0.137998D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.177513D-04
-  Ratio                         0.155983D-05
+  Out of balance force norm     0.121543D-04
+  Ratio                         0.106802D-05
   Tolerance                     0.100000D-04
 
 
@@ -1607,10 +1687,10 @@
 
 
   Newton Raphson iteration       2
-  Correction norm               0.477615D-01
-  Generalized Force norm        0.112871D+02
-  Out of balance force norm     0.660400D+00
-  Ratio                         0.582629D-01
+  Correction norm               0.477825D-01
+  Generalized Force norm        0.112969D+02
+  Out of balance force norm     0.568068D+00
+  Ratio                         0.500735D-01
   Tolerance                     0.100000D-04
 
 
@@ -1623,10 +1703,10 @@
 
 
   Newton Raphson iteration       3
-  Correction norm               0.552897D-02
-  Generalized Force norm        0.113757D+02
-  Out of balance force norm     0.239375D-01
-  Ratio                         0.210324D-02
+  Correction norm               0.558495D-02
+  Generalized Force norm        0.113764D+02
+  Out of balance force norm     0.200255D-01
+  Ratio                         0.175940D-02
   Tolerance                     0.100000D-04
 
 
@@ -1639,10 +1719,10 @@
 
 
   Newton Raphson iteration       4
-  Correction norm               0.157760D-03
+  Correction norm               0.137998D-03
   Generalized Force norm        0.113801D+02
-  Out of balance force norm     0.191684D-04
-  Ratio                         0.168436D-05
+  Out of balance force norm     0.121543D-04
+  Ratio                         0.106802D-05
   Tolerance                     0.100000D-04
 
 
