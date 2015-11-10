@@ -9170,14 +9170,14 @@
 
 %  Print the initial mesh to a file named initial_mesh.dat
 
-   PRINT INITIAL MESH, initial_mesh.dat
+   PRINT INITIAL MESH, Cahn_hilliard_initial_mesh.dat
 
    TIME, VALUE, 0.d0        % Use this to specify the initial time
    TIME, INCREMENT, 1.d-04  % Use this to specify a time increment (often needed for check stiffness)
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-%       CHECK STIFFNESS, 600
+       CHECK STIFFNESS, 600
 %       STOP
 
 
@@ -9211,7 +9211,7 @@
          SOLVER, DIRECT, NONLINEAR, 1.d-05,15, UNSYMMETRIC
 
 
-         PRINT STATE, Output_files\contourplots.dat
+         PRINT STATE, Output_files\Cahn_hilliard_contourplots.dat
             DEGREES OF FREEDOM
          END PRINT STATE
 

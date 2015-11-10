@@ -24,7 +24,7 @@
      A = parameter_list(1)
      k = parameter_list(2)
 
-     dof_total(2) = A*sin(k*coords(1))*sin(k*coords(2))
+     dof_total(2) = A*sin(k*coords(1))*cos(k*coords(2))
      
      
      end subroutine user_initialdof

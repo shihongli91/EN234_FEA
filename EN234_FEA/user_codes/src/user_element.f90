@@ -81,7 +81,7 @@ subroutine user_element_static(lmn, element_identifier, n_nodes, node_property_l
     n_state_variables, initial_state_variables, &                                                ! Input variables
     updated_state_variables,element_stiffness,element_residual, fail)      ! Output variables
   
-   else if ( element_identifier ==3001  .or. element_identifier == 4001) then           ! Stub for a 2D_plane stress element
+   else if ( element_identifier ==3001  .or. element_identifier == 4001) then           ! Stub for a viscoplastic
 
         call el_kinematic_viscoplasticity_3Dbasic(lmn, element_identifier, n_nodes, node_property_list, & ! Input variables
     n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
@@ -89,9 +89,17 @@ subroutine user_element_static(lmn, element_identifier, n_nodes, node_property_l
     n_state_variables, initial_state_variables, &                                                ! Input variables
     updated_state_variables,element_stiffness,element_residual, fail)                            ! Output variables
 
-   else if ( element_identifier ==4002 ) then           ! Stub for a 2D_plane stress element
+   else if ( element_identifier ==4002 ) then           ! Stub for a hyperelastic element
 
         call el_hyperslasticity_3dbasic(lmn, element_identifier, n_nodes, node_property_list, & ! Input variables
+    n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
+    dof_increment, dof_total, length_dof_array, &                                                ! Input variables
+    n_state_variables, initial_state_variables, &                                                ! Input variables
+    updated_state_variables,element_stiffness,element_residual, fail)                            ! Output variables
+
+   else if ( element_identifier ==600 ) then           ! Stub for a cahn_hilliard_2dbasic element
+
+        call el_cahn_hilliard_2dbasic(lmn, element_identifier, n_nodes, node_property_list, & ! Input variables
     n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
     dof_increment, dof_total, length_dof_array, &                                                ! Input variables
     n_state_variables, initial_state_variables, &                                                ! Input variables
@@ -263,7 +271,7 @@ subroutine user_element_fieldvariables(lmn, element_identifier, n_nodes, node_pr
                 n_field_variables,field_variable_names, &                                                                ! Field variable definition
                 nodal_fieldvariables)      ! Output variables
 
-        else if ( element_identifier == 3001 .or. element_identifier == 4001   ) then !  2d plane stress problem
+        else if ( element_identifier == 3001 .or. element_identifier == 4001   ) then !  kinematic_plasticity
             call fieldvars_3d_kinematic_plasticity(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
                 n_properties, element_properties,element_coords, length_coord_array, &                                   ! Input variables
                 dof_increment, dof_total, length_dof_array, &                                                            ! Input variables
@@ -271,7 +279,7 @@ subroutine user_element_fieldvariables(lmn, element_identifier, n_nodes, node_pr
                 n_field_variables,field_variable_names, &                                                                ! Field variable definition
                 nodal_fieldvariables)      ! Output variables
 
-        else if ( element_identifier == 4002) then !  2d plane stress problem
+        else if ( element_identifier == 4002) then !  hyperslasticity
             call fieldvars_hyperslasticity_3dbasic(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
                 n_properties, element_properties,element_coords, length_coord_array, &                                   ! Input variables
                 dof_increment, dof_total, length_dof_array, &                                                            ! Input variables
