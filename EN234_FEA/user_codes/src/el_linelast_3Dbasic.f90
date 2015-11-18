@@ -196,6 +196,7 @@ subroutine el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_pr
     use Element_Utilities, only : N => shape_functions_3D
     use Element_Utilities, only:  dNdxi => shape_function_derivatives_3D
     use Element_Utilities, only:  dNdx => shape_function_spatial_derivatives_3D
+    use Element_Utilities, only : dNbardx => vol_avg_shape_function_derivatives_3D
     use Element_Utilities, only : xi => integrationpoints_3D, w => integrationweights_3D
     use Element_Utilities, only : dxdxi => jacobian_3D
     use Element_Utilities, only : initialize_integration_points
@@ -235,7 +236,7 @@ subroutine el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_pr
     logical, intent( inout )      :: element_deleted                                        ! Set to .true. to delete element
 
     ! Local Variables
-    integer      :: n_points,kint
+    integer      :: n_points,kint,m_count,n_count
 
     real (prec)  ::  strain(6), dstrain(6)             ! Strain vector contains [e11, e22, e33, 2e12, 2e13, 2e23]
     real (prec)  ::  stress(6)                         ! Stress vector contains [s11, s22, s33, s12, s13, s23]
@@ -278,14 +279,41 @@ subroutine el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_pr
     D(4,4) = d44
     D(5,5) = d44
     D(6,6) = d44
+ el_vol = 0.d0
+    dNbardx = 0.d0
+    !     -- Loop over the integration points for B bar method
+    do kint = 1, n_points
+       call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
+        dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
+        call invert_small(dxdxi,dxidx,determinant)
+        dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+    !
+        do m_count = 1,n_nodes
+           do n_count = 1,3
+              dNbardx(m_count,n_count) = dNbardx(m_count,n_count) + &
+                                         dNdx(m_count,n_count)*w(kint)*determinant
+           end do
+        end do
+    !   Get the average element volume
+        el_vol = el_vol + w(kint)*determinant
+    end do
 
+    !   Get the final form of vol_avg_shape function derivatives
+       do m_count = 1,n_nodes
+         do n_count = 1,3
+             dNbardx(m_count,n_count) = dNbardx(m_count,n_count)/el_vol
+         end do
+       end do
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:3,kint),n_nodes,N,dNdxi)
         dxdxi = matmul(x(1:3,1:n_nodes),dNdxi(1:n_nodes,1:3))
         call invert_small(dxdxi,dxidx,determinant)
         dNdx(1:n_nodes,1:3) = matmul(dNdxi(1:n_nodes,1:3),dxidx)
+
         B = 0.d0
+        temp = 0.d0
+        Bbar = 0.d0
         B(1,1:3*n_nodes-2:3) = dNdx(1:n_nodes,1)
         B(2,2:3*n_nodes-1:3) = dNdx(1:n_nodes,2)
         B(3,3:3*n_nodes:3)   = dNdx(1:n_nodes,3)
@@ -296,11 +324,30 @@ subroutine el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_pr
         B(6,2:3*n_nodes-1:3) = dNdx(1:n_nodes,3)
         B(6,3:3*n_nodes:3)   = dNdx(1:n_nodes,2)
 
+        do m_count = 1,n_nodes
+        temp(1:3:1,3*m_count-2) = dNbardx(m_count,1) - dNdx(m_count,1)
+        temp(1:3:1,3*m_count-1) = dNbardx(m_count,2) - dNdx(m_count,2)
+        temp(1:3:1,3*m_count) = dNbardx(m_count,3) - dNdx(m_count,3)
+        end do
+
+        Bbar = B + 1.d0/3.d0 *temp
+
+       if ( element_identifier == 10001 ) then
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
-      
+
         stress = matmul(D,strain+dstrain)
         element_residual(1:3*n_nodes) = element_residual(1:3*n_nodes) - matmul(transpose(B),stress)*w(kint)*determinant
+
+
+       else if (element_identifier == 10002) then
+        strain = matmul(Bbar,dof_total)
+        dstrain = matmul(Bbar,dof_increment)
+
+        stress = matmul(D,strain+dstrain)
+        element_residual(1:3*n_nodes) = element_residual(1:3*n_nodes) - matmul(transpose(Bbar),stress)*w(kint)*determinant
+
+       end if
 
     end do
   
@@ -458,12 +505,13 @@ subroutine fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_pro
         temp(1:3:1,3*m_count) = dNbardx(m_count,3) - dNdx(m_count,3)
         end do
         Bbar = B + 1.d0/3.d0 *temp
-        if ( element_identifier == 1001 ) then
+        if ( element_identifier == 1001 .or. element_identifier == 10001  ) then
+
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
         strain = strain + dstrain
         stress = matmul(D,strain)
-        else if ( element_identifier == 2001 ) then
+        else if ( element_identifier == 2001 .or. element_identifier == 10002 ) then
         strain = matmul(Bbar,dof_total)
         dstrain = matmul(Bbar,dof_increment)
         strain = strain + dstrain

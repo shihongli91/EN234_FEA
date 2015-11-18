@@ -4039,7 +4039,7 @@
 %     The parameters are no. nodes on the element, total no. state variables, integer identifier
 
       ELEMENTS
-        PARAMETERS, 8, 80, 3001
+        PARAMETERS, 8, 64, 700
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
         PROPERTIES
          1000.d0, 0.3d0   % E, nu
@@ -7103,7 +7103,7 @@
 
           TIME STEP, 0.002
           NUMBER OF STEPS, 1200
-          STATE PRINT STEPS, 30
+          STATE PRINT STEPS, 20
           USER PRINT STEPS, 210
 
 
@@ -7113,9 +7113,9 @@
 %         The projected states are controlled by the user - see subroutine elstat in file usrelem.f90
 %         Also (for this example file) subroutine state_linelast_3dbasic in file el_linelast_3Dbasic.f90
 %         In this example the states are the stresses sxx,syy,szz,sxy,sxz,syz
-         PRINT STATE, Output_files\contourplots.dat
+         PRINT STATE, Output_files\notch_fracture_dynamics_contourplots.dat
             DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,Vf
+            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,Vf,SMISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE

@@ -119,13 +119,29 @@ program en234fea
 !    open (unit = IOR, file = infil(num_kk), status = 'old', ERR=500)
 !    open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)
 !!  Homework 8, solve the 2D Cahn-Hilliard equation
-  infil = './input_files/cahn_hilliard_2d_fine.in'
-  open (unit = IOR, file = infil, status = 'old', ERR=500)
-  outfil = './Output_files/cahn_hilliard_2d_fine.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!  infil = './input_files/cahn_hilliard_2d_fine.in'
+!  open (unit = IOR, file = infil, status = 'old', ERR=500)
+!  outfil = './Output_files/cahn_hilliard_2d_fine.out'
+!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 
 !!  Homework 9, Dynamic fracture with explicit dynamics, finite strain Gurson model.
+
+      infil(1) = './input_files/Gurson_3d_dynamic_1.in'
+  outfil(1) = './output_files/Gurson_3d_dynamic_1.out'
+      infil(2) = './input_files/Gurson_3d_dynamic_2.in'
+   outfil(2) = './output_files/Gurson_3d_dynamic_2.out'
+      infil(3) = './input_files/Gurson_3d_dynamic_3.in'
+   outfil(3) = './output_files/Gurson_3d_dynamic_3.out'
+      infil(4) = './input_files/Linear_elastic_3d_dynamic.in'
+   outfil(4) = './output_files/Linear_elastic_3d_dynamic.out'
+      infil(5) = './input_files/notch_fracture_dynamic.in'
+  outfil(5) = './output_files/notch_fracture_dynamic.out'
+
+  do num_kk =1,5
+   write(*,*) 'LOOP'
+    open (unit = IOR, file = infil(num_kk), status = 'old', ERR=500)
+    open (UNIT = IOW, FILE = outfil(num_kk), STATUS = 'unknown', ERR=500)
 !  infil = './input_files/notch_fracture_dynamic.in'
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
 !  outfil = './Output_files/notch_fracture_dynamic.out'
@@ -146,7 +162,7 @@ program en234fea
   endif
 
 
-! end do
+ end do
    write(6,*) ' Program completed successfully '
    stop
    500 write(6,*) ' Error opening input or output file '
